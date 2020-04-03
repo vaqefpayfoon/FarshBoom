@@ -84,7 +84,9 @@ File: scss
 	}
 	ul.dropdown-user {
 		padding: 0px;
-		min-width: 270px;
+    min-width: 270px;
+    direction: rtl;
+    text-align: right;
 		li {
 			list-style: none;
 			padding: 0px;

@@ -1,6 +1,10 @@
 using System.Net;
 using System.Text;
 using AutoMapper;
+using FarshBoom.Helpers;
+using FarshBoom.Data;
+using FarshBoom.Generic;
+using FarshBoom.Repositories.Generic;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
@@ -12,7 +16,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
-
+using Microsoft.Extensions.FileProviders;
+using System.IO;
 
 namespace FarshBoom
 {
@@ -28,19 +33,21 @@ namespace FarshBoom
         // This method gets called by the runtime. Use this method to add services to the container.
        public void ConfigureServices(IServiceCollection services)
         {       
-            services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<DataContext>(x => x.UseSqlServer(Configuration.GetConnectionString("SqlCnn")));
             services.AddCors(options => options.AddPolicy("ApiCorsPolicy", build =>
                 {                
                     build.WithOrigins("http://localhost:4200")
                         .AllowAnyMethod()
-                        .AllowAnyHeader();
+                        .AllowAnyHeader().AllowCredentials();
                 }));
                 
 
             services.AddAutoMapper(typeof(Startup));
             // Add framework services.
             services.AddMvc();
-            //services.AddScoped<IAuthRepository,AuthRepository>();
+            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            services.AddScoped<IAuthRepository,AuthRepository>();
+            services.AddTransient<Seed>();
             services.AddControllers().
             AddNewtonsoftJson(options =>
             {           
@@ -63,7 +70,7 @@ namespace FarshBoom
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, Seed seeder)
         {
             if (env.IsDevelopment())
             {
@@ -90,9 +97,13 @@ namespace FarshBoom
 
             // Use the CORS policy
             seeder.SeedUsers();
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+
             app.UseRouting();
             app.UseCors("ApiCorsPolicy");
             app.UseAuthentication();
+            app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

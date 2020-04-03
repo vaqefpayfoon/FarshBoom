@@ -9,7 +9,8 @@ export const ROUTES: RouteInfo[] = [
         label: '',
         labelClass: '',
         extralink: true,
-        submenu: []
+        submenu: [],
+        roleType: "Customer"
     },
     {
         path: '/dashboard',
@@ -19,7 +20,8 @@ export const ROUTES: RouteInfo[] = [
         label: '',
         labelClass: '',
         extralink: false,
-        submenu: []
+        submenu: [],
+        roleType: "Customer"
     },
     {
         path: '',
@@ -29,7 +31,8 @@ export const ROUTES: RouteInfo[] = [
         label: '',
         labelClass: '',
         extralink: true,
-        submenu: []
+        submenu: [],
+        roleType: "Customer"
     },
     {
         path: '/component/accordion',
@@ -39,7 +42,8 @@ export const ROUTES: RouteInfo[] = [
         label: '',
         labelClass: '',
         extralink: false,
-        submenu: []
+        submenu: [],
+        roleType: "Customer"
     },
     {
         path: '/component/alert',
@@ -49,7 +53,8 @@ export const ROUTES: RouteInfo[] = [
         label: '',
         labelClass: '',
         extralink: false,
-        submenu: []
+        submenu: [],
+        roleType: "Customer"
     },
     {
         path: '/component/carousel',
@@ -59,7 +64,8 @@ export const ROUTES: RouteInfo[] = [
         label: '',
         labelClass: '',
         extralink: false,
-        submenu: []
+        submenu: [],
+        roleType: "Customer"
     },
     {
         path: '/component/dropdown',
@@ -69,7 +75,8 @@ export const ROUTES: RouteInfo[] = [
         label: '',
         labelClass: '',
         extralink: false,
-        submenu: []
+        submenu: [],
+        roleType: "Customer"
     },
     {
         path: '/component/modal',
@@ -79,7 +86,8 @@ export const ROUTES: RouteInfo[] = [
         label: '',
         labelClass: '',
         extralink: false,
-        submenu: []
+        submenu: [],
+        roleType: "Customer"
     },
     {
         path: '/component/pagination',
@@ -89,7 +97,8 @@ export const ROUTES: RouteInfo[] = [
         label: '',
         labelClass: '',
         extralink: false,
-        submenu: []
+        submenu: [],
+        roleType: "Customer"
     },
     {
         path: '/component/poptool',
@@ -99,7 +108,8 @@ export const ROUTES: RouteInfo[] = [
         label: '',
         labelClass: '',
         extralink: false,
-        submenu: []
+        submenu: [],
+        roleType: "Customer"
     },
     {
         path: '/component/progressbar',
@@ -109,7 +119,8 @@ export const ROUTES: RouteInfo[] = [
         label: '',
         labelClass: '',
         extralink: false,
-        submenu: []
+        submenu: [],
+        roleType: "Customer"
     },
     {
         path: '/component/rating',
@@ -119,7 +130,8 @@ export const ROUTES: RouteInfo[] = [
         label: '',
         labelClass: '',
         extralink: false,
-        submenu: []
+        submenu: [],
+        roleType: "Customer"
     },
     {
         path: '/component/tabs',
@@ -129,7 +141,8 @@ export const ROUTES: RouteInfo[] = [
         label: '',
         labelClass: '',
         extralink: false,
-        submenu: []
+        submenu: [],
+        roleType: "Customer"
     },
     {
         path: '/component/timepicker',
@@ -139,7 +152,8 @@ export const ROUTES: RouteInfo[] = [
         label: '',
         labelClass: '',
         extralink: false,
-        submenu: []
+        submenu: [],
+        roleType: "Customer"
     },
     {
         path: '/component/buttons',
@@ -149,7 +163,8 @@ export const ROUTES: RouteInfo[] = [
         label: '',
         labelClass: '',
         extralink: false,
-        submenu: []
+        submenu: [],
+        roleType: "Customer"
     },
     {
         path: '/component/cards',
@@ -159,7 +174,8 @@ export const ROUTES: RouteInfo[] = [
         label: '',
         labelClass: '',
         extralink: false,
-        submenu: []
+        submenu: [],
+        roleType: "Customer"
     },
     {
         path: '/component/toast',
@@ -169,6 +185,51 @@ export const ROUTES: RouteInfo[] = [
         label: '',
         labelClass: '',
         extralink: false,
-        submenu: []
+        submenu: [],
+        roleType: "Customer"
+    },
+    {
+        path: '/panel/register',
+        title: 'ثبت نام',
+        icon: 'mdi mdi-message-reply-text',
+        class: '',
+        label: '',
+        labelClass: '',
+        extralink: false,
+        submenu: [],
+        roleType: "Customer"
+    },
+    {
+      path: '/panel/carpet',
+      title: 'ورود فرش',
+      icon: 'mdi mdi-message-reply-text',
+      class: '',
+      label: '',
+      labelClass: '',
+      extralink: false,
+      submenu: [],
+      roleType: "Customer"
+    },
+    {
+        path: '/panel/user',
+        title: 'کاربران',
+        icon: 'mdi mdi-message-reply-text',
+        class: '',
+        label: '',
+        labelClass: '',
+        extralink: false,
+        submenu: [],
+        roleType: "Customer"
+    },
+    {
+        path: '/panel/slider',
+        title: 'ویترین فرش بوم',
+        icon: 'mdi mdi-message-reply-text',
+        class: '',
+        label: '',
+        labelClass: '',
+        extralink: false,
+        submenu: [],
+        roleType: "Customer"
     }
 ];

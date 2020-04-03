@@ -14,8 +14,8 @@ export class NgbdCarouselBasicComponent {
 
 	constructor(config: NgbCarouselConfig) {
 		// customize default values of carousels used by this component tree
-		config.interval = 10000;
-		config.wrap = false;
+		config.interval = 3500;
+		config.wrap = true;
 		config.keyboard = false;
 
 		config.showNavigationArrows = true;
@@ -24,7 +24,7 @@ export class NgbdCarouselBasicComponent {
 	paused = false;
 	  unpauseOnArrow = false;
 	  pauseOnIndicator = false;
-	  pauseOnHover = true;
+	  pauseOnHover = false;
 
 	  @ViewChild('carousel', {static : true}) carousel: NgbCarousel;
 
@@ -40,10 +40,10 @@ export class NgbdCarouselBasicComponent {
 	  onSlide(slideEvent: NgbSlideEvent) {
 	    if (this.unpauseOnArrow && slideEvent.paused &&
 	      (slideEvent.source === NgbSlideEventSource.ARROW_LEFT || slideEvent.source === NgbSlideEventSource.ARROW_RIGHT)) {
-	      this.togglePaused();
+	      //this.togglePaused();
 	    }
 	    if (this.pauseOnIndicator && !slideEvent.paused && slideEvent.source === NgbSlideEventSource.INDICATOR) {
-	      this.togglePaused();
+	      //this.togglePaused();
 	    }
 	  }
 }

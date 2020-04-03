@@ -207,7 +207,7 @@ export const ComponentsRoutes: Routes = [
 				data: {
 					title: 'Toast',
 				}
-			}
+      },
 		]
 	}
 ];

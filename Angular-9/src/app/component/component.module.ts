@@ -24,6 +24,7 @@ import { CardsComponent } from './card/card.component';
 import { ToastComponent } from './toast/toast.component';
 import { ToastsContainer } from './toast/toast-container';
 
+
 @NgModule({
   imports: [
     CommonModule,
@@ -50,6 +51,9 @@ import { ToastsContainer } from './toast/toast-container';
     CardsComponent,
     ToastComponent,
     ToastsContainer
+  ],
+  providers: [
+
   ]
 })
 export class ComponentsModule {}

@@ -3,6 +3,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ROUTES } from './menu-items';
 import { RouteInfo } from './sidebar.metadata';
 import { Router, ActivatedRoute } from '@angular/router';
+import { AuthService } from '../../@services/auth.service';
 declare var $: any;
 @Component({
   selector: 'app-sidebar',
@@ -20,14 +21,16 @@ export class SidebarComponent implements OnInit {
       this.showMenu = element;
     }
   }
-  
+
   constructor(
     private modalService: NgbModal,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private authService: AuthService
   ) {}
   // End open close
   ngOnInit() {
-    this.sidebarnavItems = ROUTES.filter(sidebarnavItem => sidebarnavItem);
+    let rolType: string = this.authService.decodedToken.role;
+    this.sidebarnavItems = ROUTES.filter(sidebarnavItem => sidebarnavItem.roleType == rolType);
   }
 }

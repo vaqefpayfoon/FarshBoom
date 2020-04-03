@@ -1,29 +1,25 @@
-<!-- ============================================================== -->
-<!-- toggle and nav items -->
-<!-- ============================================================== float-left-->
 <ul class="navbar-nav mr-auto ">
   <li (click)="toggleSidebar.emit()" class="nav-item m-l-10 d-block d-lg-none"> <a class="nav-link sidebartoggler text-muted waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
 </ul>
-<!-- ============================================================== -->
-<!-- User profile and search -->
-<!-- ============================================================== -->
 <ul class="navbar-nav my-lg-0 ">
-  <!-- ==============================================================float-right -->
-  <!-- Profile -->
-  <!-- ============================================================== -->
-  <li class="nav-item dropdown" ngbDropdown placement="bottom-right">
-      <a ngbDropdownToggle class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="javascript:void(0)" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="assets/images/users/1.jpg" alt="user" class="profile-pic" /></a>
+  <li *ngIf="loggedIn()" class="nav-item dropdown" ngbDropdown placement="bottom-right">
+      <a ngbDropdownToggle class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="javascript:void(0)" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="assets/images/users/2.jpg" alt="user" class="profile-pic" /></a>
       <div class="dropdown-menu" ngbDropdownMenu>
           <ul class="dropdown-user">
-              <li><a href="#"><i class="ti-user"></i> My Profile</a></li>
-              <li><a href="#"><i class="ti-wallet"></i> My Balance</a></li>
-              <li><a href="#"><i class="ti-email"></i> Inbox</a></li>
+              <li><a (click)="onProfile()" class="handTool"><i class="ti-user"></i>&nbsp;مشخصات من&nbsp;</a></li>
               <li role="separator" class="divider"></li>
-              <li><a href="#"><i class="ti-settings"></i> Account Setting</a></li>
-              <li role="separator" class="divider"></li>
-              <li><a href="#"><i class="fa fa-power-off"></i> Logout</a></li>
+              <li><a (click)="onLogout()" class="handTool"><i class="fa fa-power-off"></i> &nbsp;خروج&nbsp;</a></li>
           </ul>
       </div>
   </li>
+  <form *ngIf="!loggedIn()" #loginForm="ngForm" class="form-inline my-2 my-lg-0" (ngSubmit)="login()">
+    <input class="form-control mr-sm-2" type="text" name="username" placeholder="نام کاربری" required [(ngModel)]="model.username">
+    <input class="form-control mr-sm-2" type="password" name="password" placeholder="کلمه عبور" required [(ngModel)]="model.password">
+      &nbsp;&nbsp;
+    <button [disabled]="!loginForm.valid" class="btn btn-success my-2 my-sm-0" type="submit">ورود</button>
+  </form>
+  &nbsp;&nbsp;
+  <div *ngIf="!loggedIn()">
+    <button class="btn btn-primary my-2 my-sm-0" type="button" (click)="onRegister()">ثبت نام</button>
+  </div>
 </ul>
-
