@@ -23,12 +23,10 @@ namespace FarshBoom.Controllers
     {
         private IGenericRepository<Good> _repo;
         private IMapper _mapper;
-        private IHostingEnvironment _env;
-        public GoodController(IGenericRepository<Good> repo, IMapper mapper, IHostingEnvironment env)
+        public GoodController(IGenericRepository<Good> repo, IMapper mapper)
         {
             _repo = repo;
             _mapper = mapper;
-            _env = env;
         }
         [HttpGet("default")]
         public IActionResult Default()
@@ -66,7 +64,7 @@ namespace FarshBoom.Controllers
         public async Task<IActionResult> PhotoUpdate(int id,
             [FromForm]UpdatePhotoGoodDto photoForCreationDto)
         {
-            var userFromRepo = await _repo.GetByIDAsync(id);
+            var goodFromRepo = await _repo.GetByIDAsync(id);
 
             var file = photoForCreationDto.File;
             
@@ -74,20 +72,26 @@ namespace FarshBoom.Controllers
             {
                 string ImageName= id.ToString() + Path.GetExtension(file.FileName);
                 string SavePath = Path.Combine(Directory.GetCurrentDirectory(),"wwwroot/img",ImageName);
-
-                using(var stream=new FileStream(SavePath, FileMode.Create))
-                {
-                    file.CopyTo(stream);
-                }
+                //string RelatedPath = Path.Combine("../wwwroot/img", ImageName);
+                string RelatedPath = Path.Combine("~/wwwroot/img", ImageName);
+                goodFromRepo.ImageUrl = ImageName;
+                MemoryStream ms = new MemoryStream();
+                    file.CopyTo(ms);
+                    goodFromRepo.Image = ms.ToArray();
+                var result = await _repo.UpdateAsync(goodFromRepo);
+                // using(var stream = new FileStream(SavePath, FileMode.Create))
+                // {
+                //     file.CopyTo(stream);
+                // }
             }
-            return Ok();
+            return Ok(goodFromRepo);
         }
         [HttpPost("deleteGood")]
-        public async Task<IActionResult> DeleteGood(int id) 
+        public async Task<IActionResult> DeleteGood(StringModel name) 
         {        
-            var user = await _repo.GetByIDAsync(id);
+            var good = await _repo.GetByIDAsync(name.Id);
 
-            await _repo.RemoveAsync(user);
+            await _repo.RemoveAsync(good.Id);
                 
             throw new Exception($"couldn't delete this carpet");
         }
@@ -117,8 +121,45 @@ namespace FarshBoom.Controllers
         public async Task<IActionResult> GetAllGoods([FromQuery]UserParams userParams) 
         {        
             PagedList<Good> goods = await _repo.GetAllAsync(userParams,"Size,Type,Color,Brand,Porz");
+
             IEnumerable<GoodDto> goodDto;
             goodDto = _mapper.Map<IEnumerable<GoodDto>>(goods);
+            
+            if(userParams.UserId != null)
+               goodDto = goodDto.Where(woak => woak.UserId == userParams.UserId);
+
+            if(userParams.TypeId != null)
+                goodDto = goodDto.Where(woak => woak.TypeId == userParams.TypeId);
+
+            if(userParams.SizeId != null)
+                goodDto = goodDto.Where(woak => woak.SizeId == userParams.SizeId);
+
+            if(userParams.BrandId != null)
+                goodDto = goodDto.Where(woak => woak.BrandId == userParams.BrandId);
+
+            if(userParams.OrderBy)
+                goodDto = goodDto.OrderByDescending(woak => woak.AddedDate);
+            else
+                goodDto = goodDto.OrderBy(woak => woak.AddedDate);
+
+            //if(userParams.UserId != null)
+            //     goods = await PagedList<Good>.CreateAsync(goods.Where(woak => woak.UserId == userParams.UserId).AsQueryable(), userParams.PageNumber, userParams.PageSize);
+
+            // if(userParams.TypeId != null)
+            //     goods = await PagedList<Good>.CreateAsync(goods.Where(woak => woak.TypeId == userParams.TypeId).AsQueryable(), userParams.PageNumber, userParams.PageSize);
+
+            // if(userParams.SizeId != null)
+            //     goods = await PagedList<Good>.CreateAsync(goods.Where(woak => woak.SizeId == userParams.SizeId).AsQueryable(), userParams.PageNumber, userParams.PageSize);
+
+            // if(userParams.BrandId != null)
+            //     goods = await PagedList<Good>.CreateAsync(goods.Where(woak => woak.BrandId == userParams.BrandId).AsQueryable(), userParams.PageNumber, userParams.PageSize);
+
+            // if(userParams.OrderBy)
+            //     goods = await PagedList<Good>.CreateAsync(goods.OrderByDescending(woak => woak.AddedDate).AsQueryable(), userParams.PageNumber, userParams.PageSize);
+            // else
+            //     goods = await PagedList<Good>.CreateAsync(goods.OrderBy(woak => woak.AddedDate).AsQueryable(), userParams.PageNumber, userParams.PageSize);
+
+
             Response.AddPagination(goods.CurrentPage, goods.PageSize,
                 goods.TotalCount, goods.TotalPages);
             return Ok(goodDto);

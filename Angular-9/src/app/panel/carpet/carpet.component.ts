@@ -120,6 +120,9 @@ export class CarpetComponent implements OnInit {
       this.good.slider = false;
       if(this._id == -1) {
         this.goodService.saveGood(this.good).subscribe(() => {
+          this._id = this.goodService.goodId;
+          this.initializeUploader();
+          this.router.navigate([`/panel/carpet/${this._id}`]);
           this.saveState = '1';
         }, error => {
             this.saveState = error.error;
@@ -149,7 +152,7 @@ export class CarpetComponent implements OnInit {
   fileOverBase(e: any): void {
     this.hasBaseDropZoneOver = e;
   }
-
+  photo: any;
   initializeUploader() {
     this.uploader = new FileUploader({
       url: this.baseUrl + 'good/'+ this._id +'/photoUpdate',
@@ -158,8 +161,20 @@ export class CarpetComponent implements OnInit {
       allowedFileType: ['image'],
       removeAfterUpload: true,
       autoUpload: false,
-      maxFileSize: 10 * 1024 * 1024
+      maxFileSize: 3 * 500 * 500,
+
     });
+
+    this.uploader.onSuccessItem = (item, response, status, headers) => {
+      if (response) {
+        const res: Good = JSON.parse(response);
+        //this.photo = '../../../../../FarshBoom/wwwroot/img' + res.imageUrl;
+        //this.photo = res.image;
+        this.photo = 'data:image/png;base64,' + res.image;
+
+        //this.photo = '../../../assets/images/background/weatherbg.jpg';
+      }
+    };
 
   }
 

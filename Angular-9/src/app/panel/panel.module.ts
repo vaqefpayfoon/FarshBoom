@@ -19,6 +19,9 @@ import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 import { GoodsResolver } from '../@resolvers/goods.resolver';
 import { GoodResolver } from '../@resolvers/good.resolver';
 import { FileUploadModule } from 'ng2-file-upload';
+import { PageContentManagmentComponent } from './page-content-managment/page-content-managment.component';
+import { PageContentComponent } from './page-content/page-content.component';
+import { SlidesResolver } from '../@resolvers/sliders.resolver';
 
 @NgModule({
   imports: [
@@ -38,13 +41,16 @@ import { FileUploadModule } from 'ng2-file-upload';
     UserManagmentComponent,
     UserComponent,
     SliderManagmentComponent,
-    SliderComponent
+    SliderComponent,
+    PageContentComponent,
+    PageContentManagmentComponent
   ],
   providers: [
     UsersResolver,
     UserResolver,
     GoodsResolver,
-    GoodResolver
+    GoodResolver,
+    SlidesResolver
   ]
 })
 export class PanelModule {}

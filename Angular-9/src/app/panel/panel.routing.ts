@@ -10,6 +10,9 @@ import { SliderManagmentComponent } from './slider-managment/slider-managment.co
 import { SliderComponent } from './slider/slider.component';
 import { GoodResolver } from '../@resolvers/good.resolver';
 import { GoodsResolver } from '../@resolvers/goods.resolver';
+import { PageContentManagmentComponent } from './page-content-managment/page-content-managment.component';
+import { PageContentComponent } from './page-content/page-content.component';
+import { SlidesResolver } from '../@resolvers/sliders.resolver';
 
 export const PanelRoutes: Routes = [
 	{
@@ -41,7 +44,7 @@ export const PanelRoutes: Routes = [
 				}
 			},
       {
-				path: 'user/:id',
+		path: 'user/:id',
         component: UserComponent,
         resolve: {user: UserResolver},
         data: {
@@ -67,7 +70,7 @@ export const PanelRoutes: Routes = [
 				}
 			},
       {
-				path: 'carpet/:id',
+		path: 'carpet/:id',
         component: CarpetComponent,
         resolve: {good: GoodResolver},
         data: {
@@ -78,13 +81,39 @@ export const PanelRoutes: Routes = [
 						{ title: 'Button' }
 					]
 				}
-			},
+		},
       {
-				path: 'slider',
+		path: 'list',
         component: SliderManagmentComponent,
+        resolve: {goods: GoodsResolver},
+        data: {
+					title: 'لیست فرش ها',
+					urls: [
+						{ title: 'Panel', url: '/panel' },
+						{ title: 'ngComponent' },
+						{ title: 'Button' }
+					]
+				}
+      },
+      {
+		path: 'slide',
+        component: SliderComponent,
+        resolve: {slides: SlidesResolver},
+        data: {
+					title: 'بارگذاری عکس ها',
+					urls: [
+						{ title: 'Panel', url: '/panel' },
+						{ title: 'ngComponent' },
+						{ title: 'Button' }
+					]
+				}
+      },
+      {
+		path: 'content',
+        component: PageContentManagmentComponent,
         resolve: {users: UsersResolver},
         data: {
-					title: 'لیست ویترین',
+					title: 'محتوای صفحات',
 					urls: [
 						{ title: 'Panel', url: '/panel' },
 						{ title: 'ngComponent' },
@@ -93,11 +122,11 @@ export const PanelRoutes: Routes = [
 				}
 			},
       {
-				path: 'slider/:id',
-        component: SliderComponent,
-        resolve: {user: UserResolver},
+		path: 'content/:id',
+        component: PageContentComponent,
+        resolve: {content: UserResolver},
         data: {
-					title: 'مدیریت ویترین',
+					title: 'مدیریت صفحات',
 					urls: [
 						{ title: 'Panel', url: '/panel' },
 						{ title: 'ngComponent' },

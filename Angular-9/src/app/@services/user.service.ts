@@ -36,7 +36,8 @@ export class UserService {
       params = params.append('pageSize', itemsPerPage);
     }
     if (userParams != null) {
-      params = params.append('orderBy', userParams.orderBy);
+      if(userParams.orderBy != null)
+        params = params.append('orderBy', userParams.orderBy);
     }
     return this.http.get<User[]>(this.baseUrl + "/getAllUsers", { observe: 'response', params,
     headers: new HttpHeaders({'Authorization': 'Bearer ' + localStorage.getItem('token')})})
@@ -97,6 +98,7 @@ export class UserService {
   }
 
   deleteUser(id: number) {
+    let name: StringModel = {id: id, name: ''};
     return this.http.post(this.baseUrl + '/deleteUser', name, {observe: 'response'}).pipe(
       map((response: any) => {
         return response.body;

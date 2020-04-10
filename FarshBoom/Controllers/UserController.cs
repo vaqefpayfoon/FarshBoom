@@ -66,11 +66,11 @@ namespace FarshBoom.Controllers
             
         }
         [HttpPost("deleteUser")]
-        public async Task<IActionResult> DeleteUser(int id) 
+        public async Task<IActionResult> DeleteUser(StringModel name) 
         {        
-            var user = await _repo.GetByIDAsync(id);
+            var user = await _repo.GetByIDAsync(name.Id);
 
-            await _repo.RemoveAsync(user);
+            await _repo.RemoveAsync(user.Id);
                 
             throw new Exception($"couldn't delete this user");
         }

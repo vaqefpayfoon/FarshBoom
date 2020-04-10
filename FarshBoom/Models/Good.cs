@@ -30,5 +30,6 @@ namespace FarshBoom.Models
         public int Width { get; set; }
         public bool Slider { get; set; } = false;
         public string ImageUrl { get; set; }
+        public byte[] Image { get; set; }
     }
 }

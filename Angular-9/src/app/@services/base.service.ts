@@ -31,6 +31,13 @@ export class BaseService {
     }));
   }
 
+  getSliderBase() {
+    return this.http.get<any>(this.baseUrl + "/getSliderBase", { observe: 'response'}).pipe(map((response: any) => {
+      const res = response.body;
+      return res;
+    }));
+  }
+
   getBase1(entity) {
     let params = new HttpParams();
     params = params.append('entity', entity);

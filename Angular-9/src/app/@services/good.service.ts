@@ -32,7 +32,21 @@ export class GoodService {
       params = params.append('pageSize', itemsPerPage);
     }
     if (userParams != null) {
-      params = params.append('orderBy', userParams.orderBy);
+      if(userParams.orderBy != null){
+        params = params.append('orderBy', userParams.orderBy);
+      }
+      if(userParams.userId != null){
+        params = params.append('userId', userParams.userId);
+      }
+      if(userParams.typeId != null){
+        params = params.append('typeId', userParams.typeId);
+      }
+      if(userParams.sizeId != null){
+        params = params.append('sizeId', userParams.sizeId);
+      }
+      if(userParams.brandId != null){
+        params = params.append('brandId', userParams.brandId);
+      }
     }
     return this.http.get<Good[]>(this.baseUrl + "/getAllGoods", { observe: 'response', params})
     .pipe(
@@ -84,6 +98,7 @@ export class GoodService {
   }
 
   deleteGood(id: number) {
+    let name: StringModel = {id: id, name: ''};
     return this.http.post(this.baseUrl + '/deleteGood', name, {observe: 'response'}).pipe(
       map((response: any) => {
         return response.body;

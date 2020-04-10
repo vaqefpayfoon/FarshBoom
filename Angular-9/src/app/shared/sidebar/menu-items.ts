@@ -222,8 +222,30 @@ export const ROUTES: RouteInfo[] = [
         roleType: "Customer"
     },
     {
-        path: '/panel/slider',
-        title: 'ویترین فرش بوم',
+        path: '/panel/list',
+        title: 'لیست فرش ها',
+        icon: 'mdi mdi-message-reply-text',
+        class: '',
+        label: '',
+        labelClass: '',
+        extralink: false,
+        submenu: [],
+        roleType: "Customer"
+    },
+    {
+        path: '/panel/slide',
+        title: 'ویترین',
+        icon: 'mdi mdi-message-reply-text',
+        class: '',
+        label: '',
+        labelClass: '',
+        extralink: false,
+        submenu: [],
+        roleType: "Customer"
+    },
+    {
+        path: '/panel/content',
+        title: 'محتوای صفحات',
         icon: 'mdi mdi-message-reply-text',
         class: '',
         label: '',

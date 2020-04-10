@@ -1,3 +1,4 @@
+using System;
 using FarshBoom.Models;
 using Microsoft.AspNetCore.Http;
 
@@ -35,6 +36,7 @@ namespace FarshBoom.Dtos
         public int Width { get; set; }
         public bool Slider { get; set; }
         public string ImageUrl { get; set; }
+        public DateTime AddedDate { get; set; }
     }
     public class GoodInsertDto
     {
@@ -57,6 +59,7 @@ namespace FarshBoom.Dtos
         public int Width { get; set; }
         public bool Slider { get; set; }
         public string ImageUrl { get; set; }        
+        public byte[] Image { get; set; }     
     }
     public class UpdatePhotoGoodDto
     {

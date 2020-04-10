@@ -22,6 +22,7 @@ namespace FarshBoom.Data
         public DbSet<Page> Pages { get; set; }
         public DbSet<PageContent> PageContents { get; set; }
         public DbSet<Like> Likes { get; set; }
+        public DbSet<Slide> Slides { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

@@ -116,7 +116,9 @@ namespace FarshBoom.Repositories.Generic
                 }              
             }                
             else
+            {
                 results = dbSet.AsQueryable();
+            }
                 
             return await PagedList<TEntity>.CreateAsync(results, userParams.PageNumber, userParams.PageSize);
 

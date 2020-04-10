@@ -30,4 +30,6 @@ export interface Good {
   slider: boolean;
   imageUrl: string;
   title: string;
+  image: any;
+  AddedDate: Date;
 }

@@ -10,6 +10,10 @@ namespace FarshBoom.Helpers
             get { return pageSize;}
             set { pageSize = (value > MaxPageSize) ? MaxPageSize : value;}
         }
-        public string OrderBy { get; set; }
+        public bool OrderBy { get; set; }
+        public int? UserId { get; set; }
+        public int? SizeId { get; set; }
+        public int? TypeId { get; set; }
+        public int? BrandId { get; set; }
     }
 }
