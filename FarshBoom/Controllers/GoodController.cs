@@ -61,8 +61,7 @@ namespace FarshBoom.Controllers
         }
         [HttpPost("{id}/photoUpdate")]
         [AllowAnonymous]
-        public async Task<IActionResult> PhotoUpdate(int id,
-            [FromForm]UpdatePhotoGoodDto photoForCreationDto)
+        public async Task<IActionResult> PhotoUpdate(int id, [FromForm]UpdatePhotoGoodDto photoForCreationDto)
         {
             var goodFromRepo = await _repo.GetByIDAsync(id);
 
