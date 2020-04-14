@@ -13,6 +13,8 @@ import { GoodsResolver } from '../@resolvers/goods.resolver';
 import { PageContentManagmentComponent } from './page-content-managment/page-content-managment.component';
 import { PageContentComponent } from './page-content/page-content.component';
 import { SlidesResolver } from '../@resolvers/sliders.resolver';
+import { PagesResolver } from '../@resolvers/pages.resolver';
+import { PageContentsResolver } from '../@resolvers/pageContents.resolver';
 
 export const PanelRoutes: Routes = [
 	{
@@ -111,7 +113,7 @@ export const PanelRoutes: Routes = [
       {
 		path: 'content',
         component: PageContentManagmentComponent,
-        resolve: {users: UsersResolver},
+        resolve: {pages: PagesResolver, pageContents: PageContentsResolver},
         data: {
 					title: 'محتوای صفحات',
 					urls: [

@@ -104,7 +104,7 @@ namespace FarshBoom.Controllers
             //GoodDto goodDto = _mapper.Map<GoodDto>(good);
             return Ok(new {pageContent = pageContent});
         }
-        [HttpGet("GetPages")]
+        [HttpGet("getPages")]
         public async Task<IActionResult> GetPages() 
         {        
             var allPages = await _repoHeader.GetAllAsync();

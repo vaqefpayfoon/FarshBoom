@@ -22,6 +22,9 @@ import { FileUploadModule } from 'ng2-file-upload';
 import { PageContentManagmentComponent } from './page-content-managment/page-content-managment.component';
 import { PageContentComponent } from './page-content/page-content.component';
 import { SlidesResolver } from '../@resolvers/sliders.resolver';
+import { PageContentResolver } from '../@resolvers/pageContent.resolver';
+import { PagesResolver } from '../@resolvers/pages.resolver';
+import { PageContentsResolver } from '../@resolvers/pageContents.resolver';
 
 @NgModule({
   imports: [
@@ -50,7 +53,10 @@ import { SlidesResolver } from '../@resolvers/sliders.resolver';
     UserResolver,
     GoodsResolver,
     GoodResolver,
-    SlidesResolver
+    SlidesResolver,
+    PageContentResolver,
+    PagesResolver,
+    PageContentsResolver
   ]
 })
 export class PanelModule {}

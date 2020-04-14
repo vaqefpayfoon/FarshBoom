@@ -1,10 +1,10 @@
 export interface Page {
-  id: Number;
+  id: number;
   title: string;
 }
 
 export interface PageContent {
-  id: Number;
+  id: number;
   title: string;
   pageId: number;
   page: string;
