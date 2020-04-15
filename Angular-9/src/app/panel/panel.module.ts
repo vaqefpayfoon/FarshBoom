@@ -25,6 +25,7 @@ import { SlidesResolver } from '../@resolvers/sliders.resolver';
 import { PageContentResolver } from '../@resolvers/pageContent.resolver';
 import { PagesResolver } from '../@resolvers/pages.resolver';
 import { PageContentsResolver } from '../@resolvers/pageContents.resolver';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 @NgModule({
   imports: [
@@ -36,6 +37,7 @@ import { PageContentsResolver } from '../@resolvers/pageContents.resolver';
     NgbModule,
     AutocompleteLibModule,
     FileUploadModule,
+    CKEditorModule
   ],
   declarations: [
     RegisterComponent,

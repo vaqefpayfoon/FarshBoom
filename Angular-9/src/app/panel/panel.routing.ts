@@ -15,6 +15,7 @@ import { PageContentComponent } from './page-content/page-content.component';
 import { SlidesResolver } from '../@resolvers/sliders.resolver';
 import { PagesResolver } from '../@resolvers/pages.resolver';
 import { PageContentsResolver } from '../@resolvers/pageContents.resolver';
+import { PageContentResolver } from '../@resolvers/pageContent.resolver';
 
 export const PanelRoutes: Routes = [
 	{
@@ -126,7 +127,7 @@ export const PanelRoutes: Routes = [
       {
 		path: 'content/:id',
         component: PageContentComponent,
-        resolve: {content: UserResolver},
+        resolve: {pageContent: PageContentResolver, pages: PagesResolver},
         data: {
 					title: 'مدیریت صفحات',
 					urls: [

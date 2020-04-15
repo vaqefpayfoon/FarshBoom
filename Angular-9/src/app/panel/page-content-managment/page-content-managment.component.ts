@@ -15,7 +15,7 @@ export class PageContentManagmentComponent implements OnInit {
 
 
   pages: Page[];
-  page: Page;
+  page: any;
   pageContents: PageContent[];
 
   protected userName: string;

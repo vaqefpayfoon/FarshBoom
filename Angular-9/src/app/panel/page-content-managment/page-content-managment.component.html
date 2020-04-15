@@ -19,8 +19,8 @@
               <div class="row">
                 <form #MangageForm="ngForm">
                   <div class="col-sm-5 form-group">
-                    <select>
-                        <option *ngFor="let item of pages" [value]="item" class="form-control">{{item.title}}</option>
+                    <select required [(ngModel)]="page" name="page" class="form-control">
+                        <option *ngFor="let item of pages" [value]="item"  class="form-control">{{item.title}}</option>
                     </select>
                   </div>
                   <div class="button-group">

@@ -1,4 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { PageContent, Page } from '../../@models/Page';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { environment } from '../../../environments/environment';
+import { PageService } from '../../@services/page.service';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import { FileUploader } from 'ng2-file-upload';
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
   selector: 'app-page-content',
@@ -6,9 +13,129 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PageContentComponent implements OnInit {
 
-  constructor() { }
+  pageContent: PageContent;
+  Editor = ClassicEditor;
+  pages: Page[];
+  page: any;
+  pageContents: PageContent[];
+  registerForm: FormGroup;
+  successMessage: string = environment.successful;
+  errorMessage: string = environment.error;
+  constructor(private pageService: PageService, private router: Router,
+     private fb: FormBuilder, private route: ActivatedRoute) { }
+     saveState: string = "0";
 
-  ngOnInit(): void {
+  _id: any;
+
+  ngOnInit() {
+    this.route.params.subscribe(
+      (param: Params) => {
+        this._id = param['id'];
+        if(this._id != -1) {
+          this.route.data.subscribe(data => {
+            this.pages = data['pages'];
+            this.pageContent = data['pageContent'];
+          });
+        } else {
+          if(this._id == -1) {
+            this.route.data.subscribe(data => {
+              this.pages = data['pages'];
+            });
+          }
+        }
+      }, error => {console.log(error)}, () => {
+
+      }
+    )
+    this.createRegisterForm();
+    setTimeout(() => {
+
+      this._id != -1 ? this.registerForm.patchValue(this.pageContent) : this.registerForm.reset();
+    }, 900);
+
+    this.initializeUploader();
+
+  }
+
+  createRegisterForm() {
+    if(this._id == -1) {
+      this.registerForm = this.fb.group({
+        title: ['', Validators.required],
+        pageId: ['', Validators.required],
+        passage: ['', Validators.required],
+      });
+    } else {
+      this.registerForm = this.fb.group({
+        id: ['', []],
+        title: ['', Validators.required],
+        pageId: ['', Validators.required],
+        passage: ['', Validators.required],
+      });
+    }
+  }
+
+  register() {
+    if (this.registerForm.valid) {
+      this.pageContent = Object.assign({}, this.registerForm.value);
+
+      if(this._id == -1) {
+        this.pageService.savePage(this.pageContent).subscribe(() => {
+          this._id = this.pageService.pageId;
+          this.initializeUploader();
+          this.router.navigate([`/panel/content/${this._id}`]);
+          this.saveState = '1';
+        }, error => {
+            this.saveState = error.error;
+            this.errorMessage = error.error
+        }, () => {
+      });
+      } else {
+        this.pageService.updatePage(this.pageContent).subscribe(() => {
+          this.saveState = '1';
+        }, error => {
+            this.saveState = error.error;
+            this.errorMessage = error.error
+        }, () => {
+        });
+      }
+    }
+  }
+
+  cancel() {
+    this.router.navigate(['/panel/carpet']);
+  }
+
+  uploader: FileUploader;
+  hasBaseDropZoneOver = false;
+  baseUrl = environment.apiUrl;
+
+  fileOverBase(e: any): void {
+    this.hasBaseDropZoneOver = e;
+  }
+  photo: any;
+  initializeUploader() {
+    this.uploader = new FileUploader({
+      url: this.baseUrl + 'Page/'+ this._id +'/photoUpdate',
+      authToken: 'Bearer ' + localStorage.getItem('token'),
+      isHTML5: true,
+      allowedFileType: ['image'],
+      removeAfterUpload: true,
+      autoUpload: false,
+      maxFileSize: 3 * 500 * 500,
+
+    });
+
+    this.uploader.onSuccessItem = (item, response, status, headers) => {
+      if (response) {
+        const res: PageContent = JSON.parse(response);
+        //this.photo = '../../../../../FarshBoom/wwwroot/img' + res.imageUrl;
+        //this.photo = res.image;
+        this.photo = 'data:image/png;base64,' + res.image;
+
+        //this.photo = '../../../assets/images/background/weatherbg.jpg';
+      }
+    };
+
   }
 
 }

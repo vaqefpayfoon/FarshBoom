@@ -8,7 +8,6 @@ export interface PageContent {
   title: string;
   pageId: number;
   page: string;
-  subject: string;
   passage: string;
   image: any;
   imageUrl: string;
