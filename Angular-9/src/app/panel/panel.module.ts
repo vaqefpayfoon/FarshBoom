@@ -25,7 +25,9 @@ import { SlidesResolver } from '../@resolvers/sliders.resolver';
 import { PageContentResolver } from '../@resolvers/pageContent.resolver';
 import { PagesResolver } from '../@resolvers/pages.resolver';
 import { PageContentsResolver } from '../@resolvers/pageContents.resolver';
-import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { CKEditorModule } from 'ckeditor4-angular';
+import { SliderListComponent } from './slider-list/slider-list.component';
+import { SlideResolver } from '../@resolvers/slide.resolver';
 
 @NgModule({
   imports: [
@@ -48,7 +50,8 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     SliderManagmentComponent,
     SliderComponent,
     PageContentComponent,
-    PageContentManagmentComponent
+    PageContentManagmentComponent,
+    SliderListComponent
   ],
   providers: [
     UsersResolver,
@@ -58,7 +61,8 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     SlidesResolver,
     PageContentResolver,
     PagesResolver,
-    PageContentsResolver
+    PageContentsResolver,
+    SlideResolver
   ]
 })
 export class PanelModule {}

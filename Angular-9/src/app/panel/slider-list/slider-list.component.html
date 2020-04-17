@@ -19,9 +19,9 @@
               <div class="row">
                 <form #MangageForm="ngForm">
                   <div class="form-row">
-                    <label class="col-sm-4 col-form-label">صفحه :</label>
-                    <select required [(ngModel)]="pageContentId" name="pageContentId" class="form-control col-md-8">
-                        <option *ngFor="let item of pageContents" [value]="item.id"  class="form-control">{{item.title}}</option>
+                    <label class="col-sm-4 col-form-label">ویترین :</label>
+                    <select required [(ngModel)]="slideId" name="slideId" class="form-control col-md-8">
+                        <option *ngFor="let item of slides" [value]="item.id"  class="form-control">{{item.title}}</option>
                     </select>
                   </div>
                   <br>
@@ -35,19 +35,21 @@
           </div>
       </div>
   </div>
-  <div class="col-md-6">
+  <div class="col-md-12">
     <table class="table table-bordered table-striped">
       <thead style="color:#ea7f7f;text-align: center;">
         <tr>
           <th scope="col">کد</th>
           <th scope="col">عنوان</th>
+          <th scope="col">متن</th>
         </tr>
       </thead>
-      <tbody *ngFor="let pageContent of pageContents">
+      <tbody *ngFor="let slide of slides">
         <tr>
-          <td><a [routerLink]="['/panel/content', pageContent.id]"
-              routerLinkActive="router-link-active">{{pageContent.id}}</a></td>
-            <td>{{pageContent.title}}</td>
+          <td><a [routerLink]="['/panel/slide', slide.id]"
+              routerLinkActive="router-link-active">{{slide.id}}</a></td>
+            <td>{{slide.title}}</td>
+            <td>{{slide.passage}}</td>
         </tr>
       </tbody>
     </table>

@@ -44,7 +44,7 @@ export class PageService {
 
   pageId: any;
   savePage(model: Page) {
-    return this.http.post(this.baseUrl + '/savePage', model, {observe: 'response'}).pipe(
+    return this.http.post(this.baseUrl + '/savePageContent', model, {observe: 'response'}).pipe(
       map((response: any) => {
         const createdPage = response.body;
          this.pageId = createdPage.id;
@@ -53,7 +53,7 @@ export class PageService {
   }
 
   updatePage(model: Page) {
-    return this.http.post(this.baseUrl + '/updatePage', model, {observe: 'response'}).pipe(
+    return this.http.post(this.baseUrl + '/updatePageContent', model, {observe: 'response'}).pipe(
       map((response: any) => {
         return response.body;
       })
@@ -62,7 +62,7 @@ export class PageService {
 
   deletePage(id: number) {
     let name: StringModel = {id: id, name: ''};
-    return this.http.post(this.baseUrl + '/deletePage', name, {observe: 'response'}).pipe(
+    return this.http.post(this.baseUrl + '/deletePageContent', name, {observe: 'response'}).pipe(
       map((response: any) => {
         return response.body;
       })

@@ -16,6 +16,8 @@ import { SlidesResolver } from '../@resolvers/sliders.resolver';
 import { PagesResolver } from '../@resolvers/pages.resolver';
 import { PageContentsResolver } from '../@resolvers/pageContents.resolver';
 import { PageContentResolver } from '../@resolvers/pageContent.resolver';
+import { SliderListComponent } from './slider-list/slider-list.component';
+import { SlideResolver } from '../@resolvers/slide.resolver';
 
 export const PanelRoutes: Routes = [
 	{
@@ -100,10 +102,10 @@ export const PanelRoutes: Routes = [
       },
       {
 		path: 'slide',
-        component: SliderComponent,
+        component: SliderListComponent,
         resolve: {slides: SlidesResolver},
         data: {
-					title: 'بارگذاری عکس ها',
+					title: 'مدیریت ویترین',
 					urls: [
 						{ title: 'Panel', url: '/panel' },
 						{ title: 'ngComponent' },
@@ -112,9 +114,22 @@ export const PanelRoutes: Routes = [
 				}
       },
       {
-		path: 'content',
+          path: 'slide/:id',
+          component: SliderComponent,
+          resolve: {slide: SlideResolver},
+          data: {
+            title: 'ویترین',
+            urls: [
+              { title: 'Panel', url: '/panel' },
+              { title: 'ngComponent' },
+              { title: 'Button' }
+            ]
+          }
+        },
+      {
+		    path: 'content',
         component: PageContentManagmentComponent,
-        resolve: {pages: PagesResolver, pageContents: PageContentsResolver},
+        resolve: {pageContents: PageContentsResolver},
         data: {
 					title: 'محتوای صفحات',
 					urls: [

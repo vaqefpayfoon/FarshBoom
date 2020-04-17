@@ -13,11 +13,10 @@ export class UserResolver implements Resolve<User> {
     constructor(private userService: UserService, private router: Router) {}
 
     resolve(route: ActivatedRouteSnapshot): Observable<User> | Promise<User> | User {
+      if(route.params['id'] != -1) {
         return this.userService.getUser(route.params['id'], 'id')
-        .pipe(catchError(error => {
-                this.router.navigate(['/component/error']);
-                return of(null);
-            })
-        );
+      } else {
+        return null;
+      }
     }
 }

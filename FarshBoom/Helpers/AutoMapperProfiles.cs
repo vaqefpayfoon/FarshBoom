@@ -25,6 +25,7 @@ namespace FarshBoom.Helpers
                 opt.MapFrom(woak => woak.User.Username);}).ForMember(des => des.Color2, opt => {
                 opt.MapFrom(woak => woak.Color2.Title);});
             CreateMap<GoodInsertDto, Good>();
+            CreateMap<SlideUpdateDto, Slide>();
         }
     }
 }

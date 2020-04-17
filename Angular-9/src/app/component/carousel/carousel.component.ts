@@ -21,7 +21,7 @@ export class NgbdCarouselBasicComponent {
 		config.showNavigationArrows = true;
 		config.showNavigationIndicators = true;
 	}
-	paused = false;
+	  paused = false;
 	  unpauseOnArrow = false;
 	  pauseOnIndicator = false;
 	  pauseOnHover = false;

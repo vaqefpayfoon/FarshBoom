@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { Slide } from '../@models/Slide';
+import { Slide } from '../@models/slide';
 import { environment } from '../../environments/environment';
 import { StringModel } from '../@models/dropDown';
 
@@ -30,8 +30,7 @@ export class SlideService {
     params = params.append('key', key);
     params = params.append('field', field);
     return this.http.get<Slide>(this.baseUrl + "/getSlide", { observe: 'response', params }).pipe(map((response: any) => {
-      const createdSlide = response.body;
-      this.slide = createdSlide.slideDto;
+      this.slide = response.body;
       return this.slide;
     }));
   }
@@ -42,6 +41,14 @@ export class SlideService {
       map((response: any) => {
         const createdSlide = response.body;
          this.slideId = createdSlide.id;
+      })
+    );
+  }
+
+  updateSlide(model: Slide) {
+    return this.http.post(this.baseUrl + '/updateSlide', model, {observe: 'response'}).pipe(
+      map((response: any) => {
+        return response.body;
       })
     );
   }

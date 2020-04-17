@@ -5,7 +5,6 @@ import { environment } from '../../../environments/environment';
 import { PageService } from '../../@services/page.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FileUploader } from 'ng2-file-upload';
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
   selector: 'app-page-content',
@@ -14,7 +13,7 @@ import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 export class PageContentComponent implements OnInit {
 
   pageContent: PageContent;
-  Editor = ClassicEditor;
+
   pages: Page[];
   page: any;
   pageContents: PageContent[];
@@ -28,6 +27,7 @@ export class PageContentComponent implements OnInit {
   _id: any;
 
   ngOnInit() {
+
     this.route.params.subscribe(
       (param: Params) => {
         this._id = param['id'];
@@ -54,7 +54,6 @@ export class PageContentComponent implements OnInit {
     }, 900);
 
     this.initializeUploader();
-
   }
 
   createRegisterForm() {
@@ -102,7 +101,7 @@ export class PageContentComponent implements OnInit {
   }
 
   cancel() {
-    this.router.navigate(['/panel/carpet']);
+    this.router.navigate(['/panel/content']);
   }
 
   uploader: FileUploader;

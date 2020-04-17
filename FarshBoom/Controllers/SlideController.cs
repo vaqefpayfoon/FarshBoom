@@ -28,22 +28,56 @@ namespace FarshBoom.Controllers
             _repo = repo;
             _mapper = mapper;
         }
-        [HttpPost("photoUpload")]
-        public async Task<IActionResult> PhotoUpload([FromForm]SlideDto slideDto)
+        [HttpPost("{id}/photoUpload")]
+        public async Task<IActionResult> PhotoUpload(int id, [FromForm]SlideDto slideDto)
         {
             
-            Slide slide = new Slide();
+            // Slide slide = new Slide();
+            // var file = slideDto.File;
+            
+            // if (file.Length > 0)
+            // {                
+            //     MemoryStream ms = new MemoryStream();
+            //         file.CopyTo(ms);
+            //         slide.Image = ms.ToArray();
+            //     var result = await _repo.InsertAsync(slide);
+            // }
+            // return Ok(slide);
+            var slideFromRepo = await _repo.GetByIDAsync(id);
+
             var file = slideDto.File;
             
             if (file.Length > 0)
-            {                
+            {
+                string ImageName= id.ToString() + Path.GetExtension(file.FileName);
+                string SavePath = Path.Combine(Directory.GetCurrentDirectory(),"wwwroot/img",ImageName);
+                //string RelatedPath = Path.Combine("../wwwroot/img", ImageName);
+                string RelatedPath = Path.Combine("~/wwwroot/img", ImageName);
                 MemoryStream ms = new MemoryStream();
                     file.CopyTo(ms);
-                    slide.Image = ms.ToArray();
-                var result = await _repo.InsertAsync(slide);
+                    slideFromRepo.Image = ms.ToArray();
+                var result = await _repo.UpdateAsync(slideFromRepo);
+                // using(var stream = new FileStream(SavePath, FileMode.Create))
+                // {
+                //     file.CopyTo(stream);
+                // }
             }
-            var items = await _repo.GetAllAsync();
-            return Ok(items);
+            return Ok(slideFromRepo);
+        }
+        [HttpGet("getSlide")]
+        public async Task<IActionResult> GetSlide(string key, string field) 
+        {        
+            //var currentUserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            var roles = ((ClaimsIdentity)User.Identity).Claims
+                .Where(c => c.Type == ClaimTypes.Role)
+                .Select(c => c.Value).FirstOrDefault();
+            Slide slide;
+            if(field.Equals("name"))
+                slide = await _repo.GetFirstAsync(woak => woak.Title.Equals(key));
+            else
+                slide = await _repo.GetFirstAsync(woak => woak.Id == Convert.ToInt32(key));
+            
+            return Ok(slide);
         }
         [HttpGet("getSlides")]
         public async Task<IActionResult> GetSlides() 
@@ -51,6 +85,32 @@ namespace FarshBoom.Controllers
             var allSlides = await _repo.GetAllAsync();
             return Ok(allSlides);
         }
+
+        [HttpPost("saveSlide")]
+        public async Task<IActionResult> SaveUser(Slide model)
+        {
+            int result = await _repo.InsertAsync(model);
+            if(result == -1)
+                throw new Exception($"couldn't insert this carpet");
+
+            //var goodToReturn = _mapper.Map<GoodDto>(goodToCreate);
+
+            return Ok(new {id = model.Id});
+        }
+
+        [HttpPost("updateSlide")]
+        public async Task<IActionResult> UpdateUser(SlideUpdateDto model)
+        {
+            Slide updatedSlide = await _repo.GetByIDAsync(model.Id);
+            _mapper.Map(model, updatedSlide);
+            var slide = await _repo.UpdateAsync(updatedSlide);
+            if(slide == -1)
+                throw new Exception($"Updating pageContent {model.Id} failed on save");
+            else
+                return Ok(model.Id);
+            
+        }
+
         [HttpPost("deleteSlide")]
         public async Task<IActionResult> DeleteSlide(StringModel name) 
         {        

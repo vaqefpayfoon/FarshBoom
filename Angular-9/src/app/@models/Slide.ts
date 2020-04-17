@@ -1,4 +1,7 @@
+
 export interface Slide {
-  id: Number;
+  id: number;
+  title: string;
+  passage: string;
   image: any;
 }

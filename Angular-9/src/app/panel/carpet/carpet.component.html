@@ -90,7 +90,7 @@
         <select formControlName="assessmentId" class="form-control col-sm-5">
           <option *ngFor="let assessment of assessments" [ngValue]="assessment.id" class="form-control">
             {{ assessment.title }}</option>
-      </select>
+        </select>
       <span *ngIf="!registerForm.get('assessmentId').valid && registerForm.get('assessmentId').touched"
         class="help-block"></span>
       </div>

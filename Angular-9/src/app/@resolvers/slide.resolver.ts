@@ -7,16 +7,15 @@ import { Slide } from '../@models/slide';
 
 
 @Injectable()
-export class SlidesResolver implements Resolve<Slide[]> {
+export class SlideResolver implements Resolve<Slide> {
 
     constructor(private slideService: SlideService, private router: Router) {}
 
-    resolve(route: ActivatedRouteSnapshot): Observable<Slide[]> {
-        return this.slideService.getSlides()
-        .pipe(catchError(error => {
-                this.router.navigate(['/component/error']);
-                return of(null);
-            })
-        );
-    }
+    resolve(route: ActivatedRouteSnapshot): Observable<Slide> | Promise<Slide> | Slide {
+      if(route.params['id'] != -1) {
+        return this.slideService.getSlide(route.params['id'], 'id')
+      } else {
+        return null;
+      }
+  }
 }

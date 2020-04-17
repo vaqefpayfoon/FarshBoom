@@ -13,21 +13,18 @@ export class PageContentManagmentComponent implements OnInit {
 
   constructor(private router: Router, private route: ActivatedRoute, private pageService: PageService) { }
 
-
-  pages: Page[];
-  page: any;
   pageContents: PageContent[];
 
   protected userName: string;
   pageContent: PageContent;
   saveState: string = "0";
+  pageContentId: number;
 
   successMessage: string = environment.successful;
   errorMessage: string = environment.error;
 
   ngOnInit(): void {
     this.route.data.subscribe(data => {
-      this.pages = data['pages'];
       this.pageContents = data['pageContents'];
     });
 
@@ -41,7 +38,7 @@ export class PageContentManagmentComponent implements OnInit {
   }
   onDelete() {
 
-    this.pageService.deletePage(this.pageContent.id).subscribe(() => {
+    this.pageService.deletePage(this.pageContentId).subscribe(() => {
       this.saveState = '1';
     }, error => {
       this.saveState = error.error;
