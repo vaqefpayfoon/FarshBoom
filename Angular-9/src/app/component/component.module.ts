@@ -23,6 +23,7 @@ import { ButtonsComponent } from './buttons/buttons.component';
 import { CardsComponent } from './card/card.component';
 import { ToastComponent } from './toast/toast.component';
 import { ToastsContainer } from './toast/toast-container';
+import { SlidesResolver } from '../@resolvers/sliders.resolver';
 
 
 @NgModule({
@@ -53,7 +54,7 @@ import { ToastsContainer } from './toast/toast-container';
     ToastsContainer
   ],
   providers: [
-
+    SlidesResolver
   ]
 })
 export class ComponentsModule {}

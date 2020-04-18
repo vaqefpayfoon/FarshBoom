@@ -12,8 +12,7 @@ using FarshBoom.Dtos;
 using System;
 
 namespace FarshBoom.Controllers
-{
-    [Authorize]
+{    
     [Route("api/[controller]")]
     [ApiController]
     public class DashboardController : ControllerBase

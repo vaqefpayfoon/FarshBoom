@@ -16,6 +16,7 @@ import { NgbdtypeheadBasicComponent } from './typehead/typehead.component';
 import { ButtonsComponent } from './buttons/buttons.component';
 import { CardsComponent } from './card/card.component';
 import { ToastComponent } from './toast/toast.component';
+import { SlidesResolver } from '../@resolvers/sliders.resolver';
 
 export const ComponentsRoutes: Routes = [
 	{
@@ -83,7 +84,8 @@ export const ComponentsRoutes: Routes = [
 			},
 			{
 				path: 'carousel',
-				component: NgbdCarouselBasicComponent,
+        component: NgbdCarouselBasicComponent,
+        resolve: {slides: SlidesResolver},
 				data: {
 					title: 'Carousel',
 					urls: [

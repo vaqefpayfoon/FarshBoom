@@ -18,7 +18,6 @@ export class SliderManagmentComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute,
     private goodService: GoodService, private baseService: BaseService) { }
 
-  @ViewChild('table1') table1: ElementRef
  page = 1;
  pagination: Pagination;
  userParams: any = {};
