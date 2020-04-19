@@ -78,9 +78,7 @@ namespace FarshBoom.Controllers
         public async Task<IActionResult> GetUser(string key, string field) 
         {        
             //var currentUserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-            var roles = ((ClaimsIdentity)User.Identity).Claims
-                .Where(c => c.Type == ClaimTypes.Role)
-                .Select(c => c.Value).FirstOrDefault();
+            
             User user;
             if(field.Equals("name"))
                 user = await _repo.GetFirstAsync(woak => woak.Username.Equals(key));

@@ -16,7 +16,7 @@ using Newtonsoft.Json;
 
 namespace FarshBoom.Controllers
 {
-    [Authorize]
+    
     [Route("api/[controller]")]
     [ApiController]
     public class SlideController : ControllerBase

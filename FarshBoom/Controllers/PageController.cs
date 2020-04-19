@@ -89,13 +89,23 @@ namespace FarshBoom.Controllers
                 
             throw new Exception($"couldn't delete this page");
         }
+        [HttpGet("getContents")]
+        public IActionResult GetContents(string key, string field) 
+        {        
+            //var currentUserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            
+            IEnumerable<PageContent> pageContents;
+            if(field.Equals("name"))
+                pageContents = _repo.GetAll().Where(woak => woak.Title.Equals(key));
+            else
+                pageContents = _repo.GetAll().Where(woak => woak.PageId == Convert.ToInt32(key));
+            //GoodDto goodDto = _mapper.Map<GoodDto>(good);
+            return Ok(new {pageContents = pageContents});
+        }
         [HttpGet("getPageContent")]
         public async Task<IActionResult> GetPageContent(string key, string field) 
         {        
             //var currentUserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-            var roles = ((ClaimsIdentity)User.Identity).Claims
-                .Where(c => c.Type == ClaimTypes.Role)
-                .Select(c => c.Value).FirstOrDefault();
             PageContent pageContent;
             if(field.Equals("name"))
                 pageContent = await _repo.GetFirstAsync(woak => woak.Title.Equals(key));

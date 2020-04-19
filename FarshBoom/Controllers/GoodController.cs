@@ -98,9 +98,6 @@ namespace FarshBoom.Controllers
         public async Task<IActionResult> GetGood(string key, string field) 
         {        
             //var currentUserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-            var roles = ((ClaimsIdentity)User.Identity).Claims
-                .Where(c => c.Type == ClaimTypes.Role)
-                .Select(c => c.Value).FirstOrDefault();
             Good good;
             if(field.Equals("name"))
                 good = await _repo.GetFirstAsync(woak => woak.FarshboomCode.Equals(key));
