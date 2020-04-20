@@ -8,5 +8,5 @@ export interface RouteInfo {
     labelClass: string;
     extralink: boolean;
     submenu : RouteInfo[];
-    roleType: string;
+    roleTypes: any[];
 }

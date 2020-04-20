@@ -144,6 +144,8 @@ File: scss
 *******************/
 
 .card {
+  direction: rtl;
+  text-align: right;
 	margin-bottom: 30px;
 	.card-subtitle {
 		font-weight: 300;

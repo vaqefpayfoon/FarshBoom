@@ -31,6 +31,14 @@ export class SidebarComponent implements OnInit {
   // End open close
   ngOnInit() {
     let rolType: string = this.authService.decodedToken.role;
-    this.sidebarnavItems = ROUTES.filter(sidebarnavItem => sidebarnavItem.roleType == rolType);
+    //console.log(ROUTES.filter(x => x.roleTypes != null ? x.roleTypes.includes('Admin'): true))
+    if(rolType) {
+      this.sidebarnavItems = ROUTES.filter(x => x.roleTypes != null ? x.roleTypes.includes(rolType) : false ||
+      x.roleTypes == null);
+    } else {
+      this.sidebarnavItems = ROUTES.filter(x => x.roleTypes == null);
+    }
+
+
   }
 }

@@ -11,40 +11,117 @@ export const ROUTES: RouteInfo[] = [
           labelClass: '',
           extralink: false,
           submenu: [],
-          roleType: "Customer"
+          roleTypes: null
       },
       {
         path: '/dashboard/content/1',
-        title: 'گونه فرش',
+        title: 'گونه های فرش',
         icon: 'mdi mdi-gauge',
         class: '',
         label: '',
         labelClass: '',
         extralink: false,
         submenu: [],
-        roleType: "Customer"
+        roleTypes: null
     },
     {
       path: '/dashboard/content/2',
-      title: 'سازمان',
+      title: 'راهنمای فرش',
       icon: 'mdi mdi-gauge',
       class: '',
       label: '',
       labelClass: '',
       extralink: false,
       submenu: [],
-      roleType: "Customer"
+      roleTypes: null
     },
     {
       path: '/dashboard/content/3',
-      title: 'محوش پریوش',
+      title: 'مواد اولیه فرش',
       icon: 'mdi mdi-gauge',
       class: '',
       label: '',
       labelClass: '',
       extralink: false,
       submenu: [],
-      roleType: "Customer"
+      roleTypes: null
+    },
+    {
+      path: '/dashboard/content/4',
+      title: 'رنگرزی',
+      icon: 'mdi mdi-gauge',
+      class: '',
+      label: '',
+      labelClass: '',
+      extralink: false,
+      submenu: [],
+      roleTypes: null
+    },
+    {
+      path: '/dashboard/content/5',
+      title: 'فرشهای عتیق',
+      icon: 'mdi mdi-gauge',
+      class: '',
+      label: '',
+      labelClass: '',
+      extralink: false,
+      submenu: [],
+      roleTypes: null
+    },
+    {
+      path: '/dashboard/content/6',
+      title: 'نقشه هاو نقش ها',
+      icon: 'mdi mdi-gauge',
+      class: '',
+      label: '',
+      labelClass: '',
+      extralink: false,
+      submenu: [],
+      roleTypes: null
+    },
+    {
+      path: '/dashboard/content/7',
+      title: 'دستگاه های بافندگی',
+      icon: 'mdi mdi-gauge',
+      class: '',
+      label: '',
+      labelClass: '',
+      extralink: false,
+      submenu: [],
+      roleTypes: null
+    },
+    {
+      path: '/dashboard/content/8',
+      title: 'حمایت از بافندگان',
+      icon: 'mdi mdi-gauge',
+      class: '',
+      label: '',
+      labelClass: '',
+      extralink: false,
+      submenu: [],
+      roleTypes: null
+    },
+    {
+      path: '/dashboard/content/9',
+      title: 'فرش،ایرانی ترین کالا',
+      icon: 'mdi mdi-gauge',
+      class: '',
+      label: '',
+      labelClass: '',
+      extralink: false,
+      submenu: [],
+      roleTypes: null
+    },
+    {
+      path: '/dashboard/content/10',
+      title: 'تماس با ما',
+      icon: 'mdi mdi-gauge',
+      class: '',
+      label: '',
+      labelClass: '',
+      extralink: false,
+      submenu: [],
+      roleTypes: null
     },
     {
         path: '/dashboard/register',
@@ -55,7 +132,7 @@ export const ROUTES: RouteInfo[] = [
         labelClass: '',
         extralink: false,
         submenu: [],
-        roleType: "Customer"
+        roleTypes: ["Admin","Customer"]
     },
     {
       path: '/panel/carpet',
@@ -66,7 +143,7 @@ export const ROUTES: RouteInfo[] = [
       labelClass: '',
       extralink: false,
       submenu: [],
-      roleType: "Customer"
+      roleTypes: ["Admin", "Provider"]
     },
     {
         path: '/panel/user',
@@ -77,7 +154,7 @@ export const ROUTES: RouteInfo[] = [
         labelClass: '',
         extralink: false,
         submenu: [],
-        roleType: "Customer"
+        roleTypes: ["Admin"]
     },
     {
         path: '/panel/list',
@@ -88,7 +165,7 @@ export const ROUTES: RouteInfo[] = [
         labelClass: '',
         extralink: false,
         submenu: [],
-        roleType: "Customer"
+        roleTypes: ["Admin"]
     },
     {
         path: '/panel/slide',
@@ -99,7 +176,7 @@ export const ROUTES: RouteInfo[] = [
         labelClass: '',
         extralink: false,
         submenu: [],
-        roleType: "Customer"
+        roleTypes: ["Admin"]
     },
     {
         path: '/panel/content',
@@ -110,6 +187,6 @@ export const ROUTES: RouteInfo[] = [
         labelClass: '',
         extralink: false,
         submenu: [],
-        roleType: "Customer"
+        roleTypes: ["Admin"]
     }
 ];

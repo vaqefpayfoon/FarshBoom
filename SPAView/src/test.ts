@@ -1,4 +1,5 @@
 // This file is required by karma.conf.js and loads recursively all the .spec and framework files
+// http://bank.farshboom.com/product_images/100/9900.jpg
 
 import 'zone.js/dist/long-stack-trace-zone';
 import 'zone.js/dist/proxy.js';

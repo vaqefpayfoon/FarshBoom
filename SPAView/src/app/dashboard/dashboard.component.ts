@@ -38,7 +38,7 @@ export class DashboardComponent implements AfterViewInit, OnInit {
   brandsDto: BrandDto[];
   projects: ProjectDto[];
 
-    constructor(private dashboardService: DashboardService, private route: ActivatedRoute, private goodService: GoodService, private baseService: BaseService, config: NgbCarouselConfig, private slideService: SlideService) {
+    constructor(private route: ActivatedRoute, private goodService: GoodService, config: NgbCarouselConfig) {
         this.subtitle = 'FarshBoom';
         this.route.params.subscribe(
           (param: Params) => {
@@ -73,20 +73,6 @@ export class DashboardComponent implements AfterViewInit, OnInit {
             element.image = 'data:image/jpg;base64,' + element.image;
         });
       });
-
-      this.baseService.getSliderBase().subscribe((res) => {
-       this.sizes = res.sizes;
-       this.types = res.types;
-       this.brands = res.brands;
-       this.users = res.users;
-
-
-     })
-
-      this.goodService.getGoods().subscribe((allGoods: Good[]) => {
-        this.allGoods = allGoods;
-      })
-
     }
 
 
