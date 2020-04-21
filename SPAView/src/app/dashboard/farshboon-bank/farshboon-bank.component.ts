@@ -9,13 +9,14 @@ import { DashboardService } from '../../@services/dashboard.service';
 
 @Component({
   selector: 'app-farshboon-bank',
-  templateUrl: './farshboon-bank.component.html'
+  templateUrl: './farshboon-bank.component.html',
+  styleUrls: ['./farshboon-bank.component.css']
 })
 export class FarshboonBankComponent implements OnInit {
 
   constructor(private router: Router, private route: ActivatedRoute,
     private baseService: BaseService, private dashboardService: DashboardService) {
-      this.pagination = {currentPage: 1, itemsPerPage: 10, totalItems: 20, totalPages: 10};
+      this.pagination = {currentPage: 1, itemsPerPage: 20, totalItems: 20, totalPages: 10};
 
      }
 
@@ -81,12 +82,12 @@ export class FarshboonBankComponent implements OnInit {
   this.loadGoods();
 }
 
-checkValue() {
-    // this.goods.forEach(woak => {
-    //   var item = document.getElementById(woak.id.toString()) as HTMLElement;
-    // });
-    console.log(this.good.slider);
-  }
-  isChecked: boolean;
+sendLike(id: number) {
+  // this.userService.sendLike(this.authService.decodedToken.nameid, id).subscribe(data => {
+  //   this.alertify.success('You have liked: ' + this.user.knownAs);
+  // }, error => {
+  //   this.alertify.error(error);
+  // });
+}
 
 }

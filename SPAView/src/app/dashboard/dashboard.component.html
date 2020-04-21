@@ -47,12 +47,39 @@
     <div class="card">
       <div class="card-body">
           <h4 class="card-title">گونه های فرش بوم</h4>
-          <div style="height: 220px">
+          <div style="height: 360px">
               <canvas baseChart height="100px" [data]="doughnutChartData" [labels]="doughnutChartLabels"
                   [options]="doughnutChartOptions" [legend]="doughnutChartLegend" [chartType]="doughnutChartType"
                   [colors]="[{backgroundColor: ['rgb(2, 190, 201)', 'rgb(116, 90, 242)', 'rgb(40, 167, 69)', 'rgb(30, 136, 229)', 'rgb(255, 178, 43)', 'rgb(239, 83, 80)', 'rgb(80, 50, 162)', 'rgb(50, 110, 162)']}]">
               </canvas>
           </div>
+          <table class="table">
+            <tr>
+              <td><span style="color:#02bec9;text-align: center;">{{doughnutChartLabels[0]}}</span></td>
+              <td><span style="color:#02bec9;text-align: center;">{{doughnutChartData[0]}}</span></td>
+
+              <td><span style="color:#745af2;text-align: center;">{{doughnutChartLabels[1]}}</span></td>
+              <td><span style="color:#745af2;text-align: center;">{{doughnutChartData[1]}}</span></td>
+            </tr>
+            <tr>
+              <td><span style="color:#28a745">{{doughnutChartLabels[2]}}</span></td>
+              <td><span style="color:#28a745">{{doughnutChartData[2]}}</span></td>
+
+              <td><span style="color:#1e88e5">{{doughnutChartLabels[3]}}</span></td>
+              <td><span style="color:#1e88e5">{{doughnutChartData[3]}}</span></td>
+            </tr>
+            <tr>
+              <td><span style="color:#ffb22b">{{doughnutChartLabels[4]}}</span></td>
+              <td><span style="color:#ffb22b">{{doughnutChartData[4]}}</span></td>
+
+              <td><span style="color:#ef5350">{{doughnutChartLabels[5]}}</span></td>
+              <td><span style="color:#ef5350">{{doughnutChartData[5]}}</span></td>
+            </tr>
+            <tr>
+              <td><span style="color:#326ea2">{{doughnutChartLabels[6]}}</span></td>
+              <td><span style="color:#326ea2">{{doughnutChartData[6]}}</span></td>
+            </tr>
+          </table>
       </div>
   </div>
   </div>

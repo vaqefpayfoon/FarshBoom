@@ -63,55 +63,39 @@
                         بازیابی
                     </button>
                   </div>
-                  <div class="col">
-                    <div class="form-group px-4">
-                      <label for="orderBy">مرتب سازی :</label>
-                      <input type="checkbox" [(ngModel)]="userParams.orderBy" name="orderBy">
-                    </div>
-                  </div>
                 </div>
               </form>
         </div>
     </div>
 </div>
-  <div class="col-md-12">
-    <table class="table table-bordered table-striped" #table1>
-      <thead style="color:#ea7f7f;text-align: center;">
-        <tr>
-          <th scope="col">کد فرش بوم </th>
-          <th scope="col">اندازه</th>
-          <th scope="col">نوع</th>
-          <th scope="col">گونه</th>
-          <th scope="col">پرز</th>
-          <th scope="col">رنگ</th>
-        </tr>
-      </thead>
-      <tbody *ngFor="let good of goods">
-        <tr>
-            <td>{{good.farshboomCode}}</td>
-            <td>{{good.size}}</td>
-            <td>{{good.type}}</td>
-            <td>{{good.brand}}</td>
-            <td>{{good.porz}}</td>
-            <td>{{good.color}}</td>
-            <td><img [src]="good.imageUrl" ></td>
-        </tr>
-      </tbody>
-    </table>
-    <div class="card">
-        <div class="card-body">
-            <h6 class="card-subtitle"></h6>
-            <div *ngIf="pagination != undefined"lass="d-flex justify-content-center">
-              <pagination
-                  [boundaryLinks]="true"
-                  [totalItems]="pagination.totalItems"
-                  [(ngModel)]="pagination.currentPage"
-                  [itemsPerPage]="pagination.itemsPerPage"
-                  (pageChanged)="pageChanged($event)"
-                previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
-              </pagination>
-            </div>
+  <div class="row">
+    <div *ngFor="let good of goods" class="col-md-3 col-sm-6">
+      <div class="card mb-4">
+        <div class="card-img-wrapper">
+          <img class="card-img-top" src="{{good.imageUrl}}">
+          <ul class="list-inline member-icons animate text-center">
+            <li class="list-inline-item"><button class="btn btn-primary" (click)="sendLike(good.id)"><i class="fa fa-heart"></i></button></li>
+          </ul>
+        </div>
+        <div class="card-body p-1">
+          <h6 class="card-title text-center mb-1"><i class="fa fa-inventory"></i>
+            {{good.type}}, {{good.size}}
+          </h6>
+          <p class="card-text text-muted text-center">{{good.color}}</p>
+        </div>
+      </div>
     </div>
+    <div class="col-md-12">
+      <div *ngIf="pagination != undefined"lass="d-flex justify-content-center">
+        <pagination
+            [boundaryLinks]="true"
+            [totalItems]="pagination.totalItems"
+            [(ngModel)]="pagination.currentPage"
+            [itemsPerPage]="pagination.itemsPerPage"
+            (pageChanged)="pageChanged($event)"
+          previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
+        </pagination>
+      </div>
     </div>
 </div>
 </div>

@@ -124,28 +124,6 @@ export const ROUTES: RouteInfo[] = [
       roleTypes: null
     },
     {
-      path: '/dashboard/content/10',
-      title: 'تماس با ما',
-      icon: 'mdi mdi-gauge',
-      class: '',
-      label: '',
-      labelClass: '',
-      extralink: false,
-      submenu: [],
-      roleTypes: null
-    },
-    {
-        path: '/dashboard/register',
-        title: 'ثبت نام',
-        icon: 'mdi mdi-message-reply-text',
-        class: '',
-        label: '',
-        labelClass: '',
-        extralink: false,
-        submenu: [],
-        roleTypes: ["Admin","Customer"]
-    },
-    {
       path: '/panel/carpet',
       title: 'ورود فرش',
       icon: 'mdi mdi-message-reply-text',

@@ -62,6 +62,6 @@ export class NavigationComponent implements AfterViewInit {
     //this.authService.login2(this.model);
   }
   onRegister() {
-    this.router.navigate(['/component/register']);
+    this.router.navigate(['/dashboard/register']);
   }
 }
