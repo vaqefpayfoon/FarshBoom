@@ -8,7 +8,6 @@ namespace FarshBoom.Dtos
     {
         [Required]
         public string Username { get; set; }
-        [Required]
         public string Title { get; set; }
 
         [Required]
@@ -18,6 +17,7 @@ namespace FarshBoom.Dtos
         public string Phone { get; set; }
         public string Email { get; set; }
         public string RoleType { get; set; }
+        
     }
     public class UserForDetailDto
     {

@@ -14,7 +14,6 @@ using Newtonsoft.Json;
 
 namespace FarshBoom.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class BaseController : ControllerBase
@@ -80,14 +79,14 @@ namespace FarshBoom.Controllers
             IEnumerable<Models.Type> types = await _repoType.GetAllAsync();
             IEnumerable<Brand> brands = await _repoBrand.GetAllAsync();
             //IEnumerable<Plan> plans = await _repoPlan.GetAllAsync();
-            //IEnumerable<Color> colors = await _repoColor.GetAllAsync();
-            //IEnumerable<Porz> porzs = await _repoPorz.GetAllAsync();
+            IEnumerable<Color> colors = await _repoColor.GetAllAsync();
+            IEnumerable<Porz> porzs = await _repoPorz.GetAllAsync();
             //IEnumerable<Chele> cheles = await _repoChele.GetAllAsync();
             //IEnumerable<Assessment> assessments = await _repoAssessment.GetAllAsync();
             //IEnumerable<Raj> rajs = await _repoRaj.GetAllAsync();
-            IEnumerable<User> users = await _repoUser.GetAsync(woak => woak.RoleType == RoleType.Provider);
+            //IEnumerable<User> users = await _repoUser.GetAsync(woak => woak.RoleType == RoleType.Provider);
             return Ok(new {
-                sizes, types, brands, users
+                sizes, types, brands, colors, porzs
                 });
         }
     }

@@ -11,6 +11,7 @@ import { PaginationModule } from 'ngx-bootstrap';
 import { SlidesResolver } from '../@resolvers/sliders.resolver';
 import { ContentComponent } from './content/content.component';
 import { RegisterComponent } from './register/register.component';
+import { FarshboonBankComponent } from './farshboon-bank/farshboon-bank.component';
 
 
 const routes: Routes = [
@@ -19,6 +20,18 @@ const routes: Routes = [
       component: RegisterComponent,
       data: {
         title: 'ثبت نام کاربر جدید',
+        urls: [
+          { title: 'Dashboard', url: '/register' },
+          { title: 'ngComponent' },
+          { title: 'Button' }
+        ]
+      }
+    },
+    {
+      path: 'farshboombank',
+      component: FarshboonBankComponent,
+      data: {
+        title: 'جست جوی فرش',
         urls: [
           { title: 'Dashboard', url: '/register' },
           { title: 'ngComponent' },
@@ -57,7 +70,7 @@ const routes: Routes = [
        PaginationModule.forRoot(),
        NgbModule,ReactiveFormsModule
     ],
-    declarations: [DashboardComponent, ContentComponent, RegisterComponent],
+    declarations: [DashboardComponent, ContentComponent, RegisterComponent, FarshboonBankComponent],
     providers:[BrandsResolver, ProjectsResolver, SlidesResolver]
 })
 export class DashboardModule { }

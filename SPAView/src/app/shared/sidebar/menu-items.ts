@@ -14,6 +14,17 @@ export const ROUTES: RouteInfo[] = [
           roleTypes: null
       },
       {
+        path: '/dashboard/farshboombank',
+        title: 'جستجوی فرش',
+        icon: 'mdi mdi-gauge',
+        class: '',
+        label: '',
+        labelClass: '',
+        extralink: false,
+        submenu: [],
+        roleTypes: null
+      },
+      {
         path: '/dashboard/content/1',
         title: 'گونه های فرش',
         icon: 'mdi mdi-gauge',

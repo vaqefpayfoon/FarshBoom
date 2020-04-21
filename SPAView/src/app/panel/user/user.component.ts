@@ -44,7 +44,7 @@ export class UserComponent implements OnInit {
        : this.registerForm.reset();
     }, 900);
   }
-  userRoleArr : DropDown[] = [{id: 'FarshBoom', name:'فرش بوم'}, {id: 'Provider', name: 'تامین کننده'}, {id: 'Customer', name:'مشتری'}];
+  userRoleArr : DropDown[] = [{id: 'Admin', name:'فرش بوم'}, {id: 'Provider', name: 'تامین کننده'}, {id: 'Customer', name:'مشتری'}];
 
   createRegisterForm() {
     if(this._id == -1) {

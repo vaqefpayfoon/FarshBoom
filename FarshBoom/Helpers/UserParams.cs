@@ -15,5 +15,7 @@ namespace FarshBoom.Helpers
         public int? SizeId { get; set; }
         public int? TypeId { get; set; }
         public int? BrandId { get; set; }
+        public int? ColorId { get; set; }
+        public int? PorzId { get; set; }
     }
 }
