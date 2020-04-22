@@ -14,7 +14,7 @@ export class BrandsResolver implements Resolve<BrandDto[]> {
     resolve(route: ActivatedRouteSnapshot): Observable<BrandDto[]> {
         return this.dashboardService.getBrnads()
         .pipe(catchError(error => {
-                this.router.navigate(['/component/error']);
+                this.router.navigate(['/dashboard/error']);
                 return of(null);
             })
         );

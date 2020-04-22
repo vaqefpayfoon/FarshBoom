@@ -14,7 +14,7 @@ export class SlidesResolver implements Resolve<Slide[]> {
     resolve(route: ActivatedRouteSnapshot): Observable<Slide[]> {
         return this.slideService.getSlides()
         .pipe(catchError(error => {
-                this.router.navigate(['/component/error']);
+                this.router.navigate(['/dashboard/error']);
                 return of(null);
             })
         );

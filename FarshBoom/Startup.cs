@@ -31,6 +31,7 @@ namespace FarshBoom
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
+        //dotnet publish -c Release -o ./publish
        public void ConfigureServices(IServiceCollection services)
         {       
             services.AddDbContext<DataContext>(x => x.UseSqlServer(Configuration.GetConnectionString("SqlCnn")));

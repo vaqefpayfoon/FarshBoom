@@ -16,7 +16,7 @@ export class UsersResolver implements Resolve<User[]> {
     resolve(route: ActivatedRouteSnapshot): Observable<User[]> {
         return this.userService.getAllUsers(this.pageNumber, this.pageSize)
         .pipe(catchError(error => {
-                this.router.navigate(['/component/error']);
+                this.router.navigate(['/dashboard/error']);
                 return of(null);
             })
         );

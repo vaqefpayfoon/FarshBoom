@@ -15,7 +15,7 @@ export class PageContentsResolver implements Resolve<PageContent[]> {
     resolve(route: ActivatedRouteSnapshot): Observable<PageContent[]> | Promise<PageContent[]> | PageContent[] {
         return this.pageService.getPageContents()
         .pipe(catchError(error => {
-                this.router.navigate(['/component/error']);
+                this.router.navigate(['/dashboard/error']);
                 return of(null);
             })
         );

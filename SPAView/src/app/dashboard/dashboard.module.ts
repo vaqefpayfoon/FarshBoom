@@ -12,6 +12,7 @@ import { SlidesResolver } from '../@resolvers/sliders.resolver';
 import { ContentComponent } from './content/content.component';
 import { RegisterComponent } from './register/register.component';
 import { FarshboonBankComponent } from './farshboon-bank/farshboon-bank.component';
+import { ErrorComponent } from './error/error.component';
 
 
 const routes: Routes = [
@@ -50,7 +51,19 @@ const routes: Routes = [
 						{ title: 'Button' }
 					]
 				}
-			},
+      },
+      {
+        path: 'error',
+        component: ErrorComponent,
+        data: {
+          title: 'عملیات ناموفق',
+          urls: [
+            { title: 'Dashboard', url: '/register' },
+            { title: 'ngComponent' },
+            { title: 'Button' }
+          ]
+        }
+      },
     {
         path: '',
         resolve: {brands: BrandsResolver, projects: ProjectsResolver, slides: SlidesResolver},
@@ -70,7 +83,7 @@ const routes: Routes = [
        PaginationModule.forRoot(),
        NgbModule,ReactiveFormsModule
     ],
-    declarations: [DashboardComponent, ContentComponent, RegisterComponent, FarshboonBankComponent],
+    declarations: [DashboardComponent, ContentComponent, RegisterComponent, FarshboonBankComponent, ErrorComponent],
     providers:[BrandsResolver, ProjectsResolver, SlidesResolver]
 })
 export class DashboardModule { }

@@ -14,7 +14,7 @@ export class ProjectsResolver implements Resolve<ProjectDto[]> {
     resolve(route: ActivatedRouteSnapshot): Observable<ProjectDto[]> {
         return this.dashboardService.getProjects()
         .pipe(catchError(error => {
-                this.router.navigate(['/component/error']);
+                this.router.navigate(['/dashboard/error']);
                 return of(null);
             })
         );

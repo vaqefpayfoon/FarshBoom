@@ -15,7 +15,7 @@ export class PagesResolver implements Resolve<Page[]> {
     resolve(route: ActivatedRouteSnapshot): Observable<Page[]> | Promise<Page[]> | Page[] {
         return this.pageService.getPages()
         .pipe(catchError(error => {
-                this.router.navigate(['/component/error']);
+                this.router.navigate(['/dashboard/error']);
                 return of(null);
             })
         );

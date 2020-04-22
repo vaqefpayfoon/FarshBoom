@@ -13,7 +13,11 @@ export class SlideResolver implements Resolve<Slide> {
 
     resolve(route: ActivatedRouteSnapshot): Observable<Slide> | Promise<Slide> | Slide {
       if(route.params['id'] != -1) {
-        return this.slideService.getSlide(route.params['id'], 'id')
+        return this.slideService.getSlide(route.params['id'], 'id').pipe(catchError(error => {
+          this.router.navigate(['/dashboard/error']);
+          return of(null);
+      })
+  );
       } else {
         return null;
       }

@@ -14,7 +14,11 @@ export class UserResolver implements Resolve<User> {
 
     resolve(route: ActivatedRouteSnapshot): Observable<User> | Promise<User> | User {
       if(route.params['id'] != -1) {
-        return this.userService.getUser(route.params['id'], 'id')
+        return this.userService.getUser(route.params['id'], 'id').pipe(catchError(error => {
+          this.router.navigate(['/dashboard/error']);
+          return of(null);
+      })
+  );
       } else {
         return null;
       }
