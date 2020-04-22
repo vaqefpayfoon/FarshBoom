@@ -55,7 +55,7 @@ const routes: Routes = [
         path: '',
         resolve: {brands: BrandsResolver, projects: ProjectsResolver, slides: SlidesResolver},
         data: {
-            title: 'Dashboard',
+            title: 'صفحه اصلی',
             urls: [
                 { title: 'Dashboard', url: '/dashboard' },
                 { title: 'Dashboard' }

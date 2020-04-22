@@ -58,6 +58,14 @@ namespace FarshBoom.Controllers
         {
             User updatedUser = await _repo.GetByIDAsync(userForUpdateDto.Id);
             _mapper.Map(userForUpdateDto, updatedUser);
+
+            byte[] passwordHash, passwordSalt;
+            CreatePasswordHash(userForUpdateDto.Password, out passwordHash, out passwordSalt);            
+
+
+            updatedUser.PasswordHash = passwordHash;
+            updatedUser.PasswordSalt = passwordSalt;
+
             var user = await _repo.UpdateAsync(updatedUser);            
             if(user == -1)
                 throw new Exception($"Updating user {userForUpdateDto.Id} failed on save");

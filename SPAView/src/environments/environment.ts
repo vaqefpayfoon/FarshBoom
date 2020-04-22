@@ -5,7 +5,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:5000/api/',
+  apiUrl: '172.18.100.16:200/api/',
   successful: 'اطلاعات با موفقیت دخیره شد',
   error: 'تراکنش ناموفق'
 };

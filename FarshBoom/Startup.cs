@@ -36,7 +36,7 @@ namespace FarshBoom
             services.AddDbContext<DataContext>(x => x.UseSqlServer(Configuration.GetConnectionString("SqlCnn")));
             services.AddCors(options => options.AddPolicy("ApiCorsPolicy", build =>
                 {                
-                    build.WithOrigins("http://localhost:4200")
+                    build.WithOrigins("http://localhost:4200", "172.18.100.16:200")
                         .AllowAnyMethod()
                         .AllowAnyHeader().AllowCredentials();
                 }));
