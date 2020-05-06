@@ -43,7 +43,19 @@ export const ROUTES: RouteInfo[] = [
       label: '',
       labelClass: '',
       extralink: false,
-      submenu: [],
+      submenu: [
+        {
+          path: '/dashboard/content/33',
+          title: 'اولیه فرش',
+          icon: 'mdi mdi-monitor',
+          class: '',
+          label: '',
+          labelClass: '',
+          extralink: false,
+          submenu: [],
+          roleTypes: null
+        }
+      ],
       roleTypes: null
     },
     {
@@ -177,5 +189,17 @@ export const ROUTES: RouteInfo[] = [
         extralink: false,
         submenu: [],
         roleTypes: ["Admin"]
+    },
+    {
+        path: '/panel/file-manager',
+        title: 'آمار',
+        icon: 'mdi mdi-message-reply-text',
+        class: '',
+        label: '',
+        labelClass: '',
+        extralink: false,
+        submenu: [],
+        roleTypes: ["Admin"]
     }
+
 ];

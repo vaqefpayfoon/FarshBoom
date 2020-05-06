@@ -1,5 +1,4 @@
 import { Component, AfterViewInit, OnInit, ViewChild } from '@angular/core';
-import { DashboardService } from '../@services/dashboard.service';
 import { BrandDto, ProjectDto } from '../@models/dashboard';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Pagination, PaginatedResult } from '../@models/pagination';
@@ -8,10 +7,10 @@ import { environment } from '../../environments/environment';
 import { GoodService } from '../@services/good.service';
 import { Size, Type, Brand} from '../@models/base';
 import { User } from '../@models/user';
-import { BaseService } from '../@services/base.service';
 import { Slide } from '../@models/slide';
 import { NgbCarouselConfig, NgbSlideEvent, NgbSlideEventSource, NgbCarousel } from '@ng-bootstrap/ng-bootstrap';
-import { SlideService } from '../@services/slide.service';
+import { StringModel } from '../@models/dropDown';
+import { KeyValue } from '../@models/keyvalue';
 
 
 @Component({
@@ -37,14 +36,21 @@ export class DashboardComponent implements AfterViewInit, OnInit {
   errorMessage: string = environment.error;
   brandsDto: BrandDto[];
   projects: ProjectDto[];
+  stringModel: StringModel[];
+  keyvalues: KeyValue[];
 
     constructor(private route: ActivatedRoute, private goodService: GoodService, config: NgbCarouselConfig) {
         this.subtitle = 'FarshBoom';
         this.route.params.subscribe(
           (param: Params) => {
             this.route.data.subscribe(data => {
-              this.brandsDto = data['brands'];
+              const res = data['brands'];
+
+              this.brandsDto = res.lstBrand;
+              this.stringModel = res.lstUbozhi;
               this.projects = data['projects'];
+              this.keyvalues = data['keyvalues'];
+
               this.doughnutChartLabels = this.brandsDto.map(woak => woak.brandName);
               this.doughnutChartData = this.brandsDto.map(woak => woak.brand);
 
@@ -52,7 +58,6 @@ export class DashboardComponent implements AfterViewInit, OnInit {
               this.lineChartData = [{data: this.projects.map(woak => woak.header), label: 'نمایشگاه های اخیر ما'}];
             });
           }, error => {console.log(error)}, () => {
-
           }
         )
         config.interval = 3500;
@@ -69,9 +74,9 @@ export class DashboardComponent implements AfterViewInit, OnInit {
     ngOnInit() {
       this.route.data.subscribe(data => {
         this.slides = data['slides'];
-        this.slides.forEach(element => {
-            element.image = 'data:image/jpg;base64,' + element.image;
-        });
+        // this.slides.forEach(element => {
+        //     element.image = 'data:image/jpg;base64,' + element.image;
+        // });
       });
     }
 
@@ -90,20 +95,7 @@ export class DashboardComponent implements AfterViewInit, OnInit {
 
       }, () => {this.page = this.pagination.currentPage});
     }
-    selectedGood: Good;
-    selectEvent(item: Good) {
-      this.selectedGood = item;
-    }
 
-    resetFilters() {
-     this.userParams.pageNumber = 1;
-     this.userParams.pageSize = 5;
-     this.userParams.userId = null;
-     this.userParams.typeId = null;
-     this.userParams.sizeId = null;
-     this.userParams.brandId = null;
-     this.loadGoods();
-   }
     // Doughnut
     public doughnutChartLabels: string[];
     public doughnutChartOptions: any = {

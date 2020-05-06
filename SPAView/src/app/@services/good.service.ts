@@ -16,7 +16,8 @@ export class GoodService {
   good: Good;
 
   getGoods(): Observable<Good[]> {
-    return this.http.get<Good[]>(this.baseUrl + "/getGoods", { observe: 'response'})
+    return this.http.get<Good[]>(this.baseUrl + "/getGoods", { observe: 'response',
+    headers: new HttpHeaders({'Authorization': 'Bearer ' + localStorage.getItem('token')})})
     .pipe(map((response: any) => { this.goods = response.body;
       return this.goods;
     }));
@@ -48,7 +49,8 @@ export class GoodService {
         params = params.append('brandId', userParams.brandId);
       }
     }
-    return this.http.get<Good[]>(this.baseUrl + "/getAllGoods", { observe: 'response', params})
+    return this.http.get<Good[]>(this.baseUrl + "/getAllGoods", { observe: 'response', params,
+    headers: new HttpHeaders({'Authorization': 'Bearer ' + localStorage.getItem('token')})})
     .pipe(
       map(response => {
         paginatedResult.result = response.body;
@@ -72,7 +74,8 @@ export class GoodService {
   }
   goodnames: string[];
   getGoodNames() {
-    return this.http.get<Good>(this.baseUrl + "/getGoodNames", { observe: 'response'}).pipe(map((response: any) => {
+    return this.http.get<Good>(this.baseUrl + "/getGoodNames", { observe: 'response',
+    headers: new HttpHeaders({'Authorization': 'Bearer ' + localStorage.getItem('token')})}).pipe(map((response: any) => {
       const goodName = response.body;
       this.goodnames = goodName;
       return this.goodnames;
@@ -81,7 +84,8 @@ export class GoodService {
 
   goodId: any;
   saveGood(model: Good) {
-    return this.http.post(this.baseUrl + '/saveGood', model, {observe: 'response'}).pipe(
+    return this.http.post(this.baseUrl + '/saveGood', model, {observe: 'response',
+    headers: new HttpHeaders({'Authorization': 'Bearer ' + localStorage.getItem('token')})}).pipe(
       map((response: any) => {
         const createdGood = response.body;
          this.goodId = createdGood.id;
@@ -90,7 +94,8 @@ export class GoodService {
   }
 
   updateGood(model: Good) {
-    return this.http.post(this.baseUrl + '/updateGood', model, {observe: 'response'}).pipe(
+    return this.http.post(this.baseUrl + '/updateGood', model, {observe: 'response',
+    headers: new HttpHeaders({'Authorization': 'Bearer ' + localStorage.getItem('token')})}).pipe(
       map((response: any) => {
         return response.body;
       })
@@ -99,7 +104,8 @@ export class GoodService {
 
   deleteGood(id: number) {
     let name: StringModel = {id: id, name: ''};
-    return this.http.post(this.baseUrl + '/deleteGood', name, {observe: 'response'}).pipe(
+    return this.http.post(this.baseUrl + '/deleteGood', name, {observe: 'response',
+    headers: new HttpHeaders({'Authorization': 'Bearer ' + localStorage.getItem('token')})}).pipe(
       map((response: any) => {
         return response.body;
       })

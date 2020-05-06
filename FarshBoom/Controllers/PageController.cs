@@ -2,17 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using FarshBoom.Dtos;
-using FarshBoom.Helpers;
 using FarshBoom.Models;
 using FarshBoom.Repositories.Generic;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 
 namespace FarshBoom.Controllers
 {
@@ -65,18 +61,19 @@ namespace FarshBoom.Controllers
             if (file.Length > 0)
             {
                 string ImageName= id.ToString() + Path.GetExtension(file.FileName);
-                string SavePath = Path.Combine(Directory.GetCurrentDirectory(),"wwwroot/img",ImageName);
-                //string RelatedPath = Path.Combine("../wwwroot/img", ImageName);
-                string RelatedPath = Path.Combine("~/wwwroot/img", ImageName);
-                pageContentFromRepo.ImageUrl = ImageName;
+                string SavePath = Path.Combine(Directory.GetCurrentDirectory(),"wwwroot/assets/page",ImageName);
+                string getDit = Directory.GetCurrentDirectory();
+                string RelatedPath = Path.Combine("~/wwwroot/assets/page", ImageName);
+                
+                pageContentFromRepo.ImageUrl = "/assets/page" + "/" + ImageName;
                 MemoryStream ms = new MemoryStream();
                     file.CopyTo(ms);
-                    pageContentFromRepo.Image = ms.ToArray();
+                    //pageContentFromRepo.Image = ms.ToArray();
                 var result = await _repo.UpdateAsync(pageContentFromRepo);
-                // using(var stream = new FileStream(SavePath, FileMode.Create))
-                // {
-                //     file.CopyTo(stream);
-                // }
+                using(var stream = new FileStream(SavePath, FileMode.Create))
+                {
+                    file.CopyTo(stream);
+                }
             }
             return Ok(pageContentFromRepo);
         }

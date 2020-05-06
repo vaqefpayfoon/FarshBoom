@@ -152,7 +152,7 @@ export class CarpetComponent implements OnInit {
   fileOverBase(e: any): void {
     this.hasBaseDropZoneOver = e;
   }
-  photo: any;
+  photo: string;
   initializeUploader() {
     this.uploader = new FileUploader({
       url: this.baseUrl + 'good/'+ this._id +'/photoUpdate',
@@ -168,11 +168,8 @@ export class CarpetComponent implements OnInit {
     this.uploader.onSuccessItem = (item, response, status, headers) => {
       if (response) {
         const res: Good = JSON.parse(response);
-        //this.photo = '../../../../../FarshBoom/wwwroot/img' + res.imageUrl;
-        //this.photo = res.image;
-        this.photo = 'data:image/png;base64,' + res.image;
-
-        //this.photo = '../../../assets/images/background/weatherbg.jpg';
+        console.log(response);
+        this.photo = res.imageUrl;
       }
     };
 

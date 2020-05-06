@@ -17,6 +17,7 @@ import { PageContentsResolver } from '../@resolvers/pageContents.resolver';
 import { PageContentResolver } from '../@resolvers/pageContent.resolver';
 import { SliderListComponent } from './slider-list/slider-list.component';
 import { SlideResolver } from '../@resolvers/slide.resolver';
+import { FileManagerComponent } from './file-manager/file-manager.component';
 
 export const PanelRoutes: Routes = [
 	{
@@ -132,6 +133,18 @@ export const PanelRoutes: Routes = [
         resolve: {pageContent: PageContentResolver, pages: PagesResolver},
         data: {
 					title: 'مدیریت صفحات',
+					urls: [
+						{ title: 'Panel', url: '/panel' },
+						{ title: 'ngComponent' },
+						{ title: 'Button' }
+					]
+				}
+			},
+      {
+		path: 'file-manager',
+        component: FileManagerComponent,
+        data: {
+					title: 'آمار',
 					urls: [
 						{ title: 'Panel', url: '/panel' },
 						{ title: 'ngComponent' },

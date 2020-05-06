@@ -19,9 +19,9 @@ export class ContentComponent implements OnInit {
         this._id = param['id'];
         this.pageService.getContents(this._id, "id").subscribe((_pageContents: PageContent[]) => {
           this.pageContents = _pageContents;
-          this.pageContents.forEach(element => {
-            element.image = 'data:image/jpg;base64,' + element.image;
-        });
+        //   this.pageContents.forEach(element => {
+        //     element.image = 'data:image/jpg;base64,' + element.image;
+        // });
         })
       }, error => {console.log(error)}, () => {
 

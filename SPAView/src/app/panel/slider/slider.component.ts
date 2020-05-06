@@ -99,7 +99,7 @@ export class SliderComponent implements OnInit {
   fileOverBase(e: any): void {
     this.hasBaseDropZoneOver = e;
   }
-  photo: any;
+  photo: string;
   initializeUploader() {
     this.uploader = new FileUploader({
       url: this.baseUrl + 'slide/'+ this._id +'/photoUpload',
@@ -115,11 +115,8 @@ export class SliderComponent implements OnInit {
     this.uploader.onSuccessItem = (item, response, status, headers) => {
       if (response) {
         const res: Slide = JSON.parse(response);
-        //this.photo = '../../../../../FarshBoom/wwwroot/img' + res.imageUrl;
-        //this.photo = res.image;
-        //this.slide = res;
-        //this.photo = '../../../assets/images/background/weatherbg.jpg';
-        this.photo = 'data:image/png;base64,' + res.image;
+        this.photo = res.imageUrl;
+        console.log(response);
       }
     };
 

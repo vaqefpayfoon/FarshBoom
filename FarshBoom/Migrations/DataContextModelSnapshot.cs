@@ -135,9 +135,6 @@ namespace FarshBoom.Migrations
                     b.Property<string>("FarshboomCode")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte[]>("Image")
-                        .HasColumnType("varbinary(max)");
-
                     b.Property<string>("ImageUrl")
                         .HasColumnType("nvarchar(max)");
 
@@ -209,6 +206,31 @@ namespace FarshBoom.Migrations
                     b.ToTable("Goods");
                 });
 
+            modelBuilder.Entity("FarshBoom.Models.KeyValue", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime?>("AddedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("LastModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("KeyValues");
+                });
+
             modelBuilder.Entity("FarshBoom.Models.Like", b =>
                 {
                     b.Property<int>("Id")
@@ -270,9 +292,6 @@ namespace FarshBoom.Migrations
 
                     b.Property<DateTime?>("AddedDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<byte[]>("Image")
-                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("ImageUrl")
                         .HasColumnType("nvarchar(max)");
@@ -394,8 +413,8 @@ namespace FarshBoom.Migrations
                     b.Property<DateTime?>("AddedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<byte[]>("Image")
-                        .HasColumnType("varbinary(max)");
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("LastModifiedDate")
                         .HasColumnType("datetime2");

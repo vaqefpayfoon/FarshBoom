@@ -46,8 +46,51 @@ namespace FarshBoom.Controllers
                 brand.BrandName = reader["brand_name"].ToString();
                 lstBrand.Add(brand);
             }
+            int total = lstBrand.Sum(a => a.Brand);
+            foreach(BrandDto woak in lstBrand)
+            {
+                woak.Brand = (woak.Brand * 100) / total;
+            }
+            total = lstBrand.Sum(a => a.Brand);
+            int remain = 100 - total;
+
+            for(int i=0; i<remain; i++)
+            {
+                lstBrand[i].Brand = lstBrand[i].Brand + 1;
+            }
+            reader.Close();
+            command = new SqlCommand();
+            command.Connection = cnn;
+            command.CommandText = @"SELECT count(srl) as cnt FROM [94_farsheboom].[dbo].[bas_project]";
+            reader = command.ExecuteReader();
+            List<StringModel> lstUbozhi = new List<StringModel>();
+            while (reader.Read())
+            {
+                if(reader["cnt"] == null)
+                    continue;
+                StringModel ubozhi = new StringModel();
+                ubozhi.Id = Convert.ToInt32(reader["cnt"]);
+                ubozhi.Name = "exhibition";
+                lstUbozhi.Add(ubozhi);
+            }
+            reader.Close();
+            command = new SqlCommand();
+            command.Connection = cnn;
+            command.CommandText = @"SELECT count(srl) as cnt FROM [94_farsheboom].[dbo].[bas_provider]";
+            reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                if(reader["cnt"] == null)
+                    continue;
+                StringModel ubozhi = new StringModel();
+                ubozhi.Id = Convert.ToInt32(reader["cnt"]);
+                ubozhi.Name = "provider";
+                lstUbozhi.Add(ubozhi);
+            }
+
             cnn.Close();
-            return Ok(lstBrand);
+
+            return Ok(new {lstBrand, lstUbozhi});
         }
 
         [HttpGet("getProjects")]

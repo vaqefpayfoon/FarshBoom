@@ -58,13 +58,12 @@ namespace FarshBoom.Dtos
         public int Lenght { get; set; }
         public int Width { get; set; }
         public bool Slider { get; set; }
-        public string ImageUrl { get; set; }        
-        public byte[] Image { get; set; }     
+        public string ImageUrl { get; set; }      
     }
     public class UpdatePhotoGoodDto
     {
         public int Id { get; set; }
-        public string Url { get; set; }
+        public string ImageUrl { get; set; }
         public IFormFile File { get; set; }
     }
 }

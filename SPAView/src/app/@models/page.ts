@@ -9,6 +9,5 @@ export interface PageContent {
   pageId: number;
   page: string;
   passage: string;
-  image: any;
   imageUrl: string;
 }

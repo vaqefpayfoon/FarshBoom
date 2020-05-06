@@ -19,8 +19,8 @@ export class DashboardService {
 
   getBrnads(): Observable<BrandDto[]> {
     return this.http.get<BrandDto[]>(this.baseUrl + "/getBrnads", { observe: 'response'})
-    .pipe(map((response: any) => { this.brnads = response.body;
-      return this.brnads;
+    .pipe(map((response: any) => { const res = response.body;
+      return res;
     }));
   }
 

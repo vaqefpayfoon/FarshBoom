@@ -4,8 +4,9 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false,
-  apiUrl: 'http://172.18.100.16:200/api/',
+  production: true,
+  //apiUrl: 'http://newsite.farshboom.com/api/',
+  apiUrl: 'http://localhost:5000/api/',
   successful: 'اطلاعات با موفقیت دخیره شد',
   error: 'تراکنش ناموفق'
 };

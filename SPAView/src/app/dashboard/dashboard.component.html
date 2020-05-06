@@ -7,7 +7,7 @@
           <ul>
             <li *ngFor="let slide of slides">
               <ng-template ngbSlide>
-                <img [src]= "slide.image" class="img-fluid"/>
+                <img src= "{{slide.imageUrl}}" class="img-fluid"/>
                 <div class="carousel-caption">
                   <h3 class="text-white font-bold">{{slide.title}}</h3>
                   <p>{{slide.passage}}</p>
@@ -56,28 +56,28 @@
           <table class="table">
             <tr>
               <td><span style="color:#02bec9;text-align: center;">{{doughnutChartLabels[0]}}</span></td>
-              <td><span style="color:#02bec9;text-align: center;">{{doughnutChartData[0]}}</span></td>
+              <td><span style="color:#02bec9;text-align: center;">{{doughnutChartData[0] + "%"}}</span></td>
 
               <td><span style="color:#745af2;text-align: center;">{{doughnutChartLabels[1]}}</span></td>
-              <td><span style="color:#745af2;text-align: center;">{{doughnutChartData[1]}}</span></td>
+              <td><span style="color:#745af2;text-align: center;">{{doughnutChartData[1] + "%"}}</span></td>
             </tr>
             <tr>
               <td><span style="color:#28a745">{{doughnutChartLabels[2]}}</span></td>
-              <td><span style="color:#28a745">{{doughnutChartData[2]}}</span></td>
+              <td><span style="color:#28a745">{{doughnutChartData[2] + "%"}}</span></td>
 
               <td><span style="color:#1e88e5">{{doughnutChartLabels[3]}}</span></td>
-              <td><span style="color:#1e88e5">{{doughnutChartData[3]}}</span></td>
+              <td><span style="color:#1e88e5">{{doughnutChartData[3] + "%"}}</span></td>
             </tr>
             <tr>
               <td><span style="color:#ffb22b">{{doughnutChartLabels[4]}}</span></td>
-              <td><span style="color:#ffb22b">{{doughnutChartData[4]}}</span></td>
+              <td><span style="color:#ffb22b">{{doughnutChartData[4] + "%"}}</span></td>
 
               <td><span style="color:#ef5350">{{doughnutChartLabels[5]}}</span></td>
-              <td><span style="color:#ef5350">{{doughnutChartData[5]}}</span></td>
+              <td><span style="color:#ef5350">{{doughnutChartData[5] + "%"}}</span></td>
             </tr>
             <tr>
               <td><span style="color:#326ea2">{{doughnutChartLabels[6]}}</span></td>
-              <td><span style="color:#326ea2">{{doughnutChartData[6]}}</span></td>
+              <td><span style="color:#326ea2">{{doughnutChartData[6] + "%"}}</span></td>
             </tr>
           </table>
       </div>
@@ -85,11 +85,37 @@
   </div>
   <div class="col-md-8">
     <div class="card">
-      <div class="card-body">
-          <h4 class="card-title">ایده فرش بوم</h4>
-          <p class="card-text">در نمایشگاههای فرش بوم مشتریان می توانند در میان انبوهی از فرشهای عالی گلچین شده که تنوع زیادی در اندازه، رنگ، نقشه و قیمت دارند، فرش مورد پسند خود را در محیطی آرام با کمک مشاورین فرش بوم انتخاب کرده و قیمتی خوب ، به طور مستقیم از تولیدکننده بخرند. هر تخته از این فرشها توسط کارشناسان خبره فرش بوم با دقت فراوان از میان صدها تخته فرش دیگر به شرط سلامت کامل بافت ، انتخاب و در نمایشگاه عرضه شده است. بنابرین مشتریان حتی با دانش فنی اندک درباره فرش، می توانند فرش مورد پسند خود با اطمینان کامل خریداری کنند. شایان ذکر است که وجوه پرداختی مشتریان عزیز سریعاً و نقداً به تولید کنندگان گرامی پرداخت می گردد تا بی واسطه به دست هنرمندان طراح، رنگرز، فرشباف، و سایر تلاشگران زنجیره تولید فرش برسد.</p>
-          <p class="card-text">این شیوه نوین عرضه فرش دستباف ایرانی برای اولین بار توسط فرش بوم اجرا شده و تا امروز نمونه مشابهی ندارد. امیدواریم تلاش ما که تاکنون خوشبختانه با استقبال خوب مشتریان عزیز و تولید کنندگان گرامی همراه بوده، در جهت رونق بازار فرش دستباف ایرانی که شناسنامه فرهنگ این سرزمین است، موثر افتد.</p>
-      </div>
-  </div>
+			<div class="card-body">
+				<ngb-carousel  #carousel interval="4000" (slide)="onSlide($event)">
+          <ng-template ngbSlide>
+						<img src="assets/images/users/product.jpg" class="img-fluid" alt="Random third slide">
+						<div class="carousel-caption">
+							<h3><p style="color:maroon;text-align: center;font-weight: bold;">تعداد فالورهای فرش بوم{{keyvalues[0].title}}  </p></h3>
+						</div>
+					</ng-template>
+					<ng-template ngbSlide>
+						<img src="assets/images/users/team.jpg" class="img-fluid" alt="Random first slide">
+						<div class="carousel-caption">
+              <h3><p style="color:maroon;text-align: center;font-weight: bold;">تعداد تولید کنندگان و شرکای تجاری فرش بوم
+                <span>{{stringModel[1].id}}</span>
+              </p></h3>
+						</div>
+					</ng-template>
+					<ng-template ngbSlide>
+						<img src="assets/images/users/providers.jpg" class="img-fluid" alt="Random second slide">
+						<div class="carousel-caption">
+              <br><br>
+							<h3><p style="color:maroon;text-align: center;font-weight: bold;">تعداد نمایشگاه های فرش بوم {{stringModel[0].id}}</p></h3>
+						</div>
+					</ng-template>
+					<ng-template ngbSlide>
+						<img src="assets/images/users/exhibition.jpg" class="img-fluid" alt="Random third slide">
+						<div class="carousel-caption">
+							<h3><p style="color:maroon;text-align: center;font-weight: bold;">تعداد بازدیدکنندگان نمایشگاه{{keyvalues[1].title}}</p></h3>
+						</div>
+          </ng-template>
+				</ngb-carousel>
+			</div>
+		</div>
   </div>
 </div>

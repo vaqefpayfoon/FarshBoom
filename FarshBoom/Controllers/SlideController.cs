@@ -16,7 +16,7 @@ using Newtonsoft.Json;
 
 namespace FarshBoom.Controllers
 {
-    
+    [AllowAnonymous]
     [Route("api/[controller]")]
     [ApiController]
     public class SlideController : ControllerBase
@@ -50,17 +50,18 @@ namespace FarshBoom.Controllers
             if (file.Length > 0)
             {
                 string ImageName= id.ToString() + Path.GetExtension(file.FileName);
-                string SavePath = Path.Combine(Directory.GetCurrentDirectory(),"wwwroot/img",ImageName);
+                string SavePath = Path.Combine(Directory.GetCurrentDirectory(),"wwwroot/assets/slide",ImageName);
                 //string RelatedPath = Path.Combine("../wwwroot/img", ImageName);
-                string RelatedPath = Path.Combine("~/wwwroot/img", ImageName);
+                string RelatedPath = Path.Combine("~/wwwroot/assets/slide", ImageName);
+                slideFromRepo.ImageUrl = "/assets/slide" + "/" + ImageName;
                 MemoryStream ms = new MemoryStream();
                     file.CopyTo(ms);
-                    slideFromRepo.Image = ms.ToArray();
+                    //slideFromRepo.Image = ms.ToArray();
                 var result = await _repo.UpdateAsync(slideFromRepo);
-                // using(var stream = new FileStream(SavePath, FileMode.Create))
-                // {
-                //     file.CopyTo(stream);
-                // }
+                using(var stream = new FileStream(SavePath, FileMode.Create))
+                {
+                    file.CopyTo(stream);
+                }
             }
             return Ok(slideFromRepo);
         }

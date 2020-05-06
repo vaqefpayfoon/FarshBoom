@@ -24,9 +24,9 @@ import { SlidesResolver } from '../@resolvers/sliders.resolver';
 import { PageContentResolver } from '../@resolvers/pageContent.resolver';
 import { PagesResolver } from '../@resolvers/pages.resolver';
 import { PageContentsResolver } from '../@resolvers/pageContents.resolver';
-import { CKEditorModule } from 'ckeditor4-angular';
 import { SliderListComponent } from './slider-list/slider-list.component';
 import { SlideResolver } from '../@resolvers/slide.resolver';
+import { FileManagerComponent } from './file-manager/file-manager.component';
 
 @NgModule({
   imports: [
@@ -37,8 +37,7 @@ import { SlideResolver } from '../@resolvers/slide.resolver';
     ReactiveFormsModule,
     NgbModule,
     AutocompleteLibModule,
-    FileUploadModule,
-    CKEditorModule
+    FileUploadModule
   ],
   declarations: [
     CarpetMangmentComponent,
@@ -49,7 +48,8 @@ import { SlideResolver } from '../@resolvers/slide.resolver';
     SliderComponent,
     PageContentComponent,
     PageContentManagmentComponent,
-    SliderListComponent
+    SliderListComponent,
+    FileManagerComponent
   ],
   providers: [
     UsersResolver,

@@ -86,4 +86,13 @@ namespace FarshBoom.FluentApiMapping
             t.Property(x => x.Title).IsRequired();
         }
     }
+    public class KeyValueMap : Extensions.DbEntityConfiguration<KeyValue>
+    {
+        public override void Configure(EntityTypeBuilder<KeyValue> t)
+        {
+            t.ToTable("KeyValues");
+            t.HasKey(x => x.Id);
+            t.Property(x => x.Title).IsRequired();
+        }
+    }
 }

@@ -23,6 +23,7 @@ namespace FarshBoom.Data
         public DbSet<PageContent> PageContents { get; set; }
         public DbSet<Like> Likes { get; set; }
         public DbSet<Slide> Slides { get; set; }
+        public DbSet<KeyValue> KeyValues { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -96,6 +97,7 @@ namespace FarshBoom.Data
             builder.AddConfiguration(new CheleMap());
             builder.AddConfiguration(new PorzMap());
             builder.AddConfiguration(new RajMap());
+            builder.AddConfiguration(new KeyValueMap());
         }
     }
 }

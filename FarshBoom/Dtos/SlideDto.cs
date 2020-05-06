@@ -6,6 +6,7 @@ namespace FarshBoom.Dtos
     {
         public int Id { get; set; }
         public IFormFile File { get; set; }
+        public string ImageUrl { get; set; }
     }
     public class SlideUpdateDto
     {

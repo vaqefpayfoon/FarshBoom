@@ -13,6 +13,8 @@ import { ContentComponent } from './content/content.component';
 import { RegisterComponent } from './register/register.component';
 import { FarshboonBankComponent } from './farshboon-bank/farshboon-bank.component';
 import { ErrorComponent } from './error/error.component';
+import { KeyValuesResolver } from '../@resolvers/keyvalues.resolver';
+import { FarshCartComponent } from './farsh-cart/farsh-cart.component';
 
 
 const routes: Routes = [
@@ -20,7 +22,7 @@ const routes: Routes = [
       path: 'register',
       component: RegisterComponent,
       data: {
-        title: 'ثبت نام کاربر جدید',
+        title: '',
         urls: [
           { title: 'Dashboard', url: '/register' },
           { title: 'ngComponent' },
@@ -32,7 +34,7 @@ const routes: Routes = [
       path: 'farshboombank',
       component: FarshboonBankComponent,
       data: {
-        title: 'جست جوی فرش',
+        title: '',
         urls: [
           { title: 'Dashboard', url: '/register' },
           { title: 'ngComponent' },
@@ -64,11 +66,36 @@ const routes: Routes = [
           ]
         }
       },
+      {
+          path: 'dashboard',
+          resolve: {brands: BrandsResolver, projects: ProjectsResolver, slides: SlidesResolver},
+          data: {
+              title: '',
+              urls: [
+                  { title: 'Dashboard', url: '/dashboard' },
+                  { title: 'Dashboard' }
+              ]
+          },
+          component: DashboardComponent
+      },
     {
-        path: '',
+        path: '', redirectTo: 'pages', pathMatch: 'full',
         resolve: {brands: BrandsResolver, projects: ProjectsResolver, slides: SlidesResolver},
         data: {
-            title: 'صفحه اصلی',
+            title: '',
+            urls: [
+                { title: 'Dashboard', url: '/dashboard' },
+                { title: 'Dashboard' }
+            ]
+        },
+        component: DashboardComponent
+    }
+    ,
+    {
+        path: '**',
+        resolve: {brands: BrandsResolver, projects: ProjectsResolver, slides: SlidesResolver, keyvalues: KeyValuesResolver},
+        data: {
+            title: '',
             urls: [
                 { title: 'Dashboard', url: '/dashboard' },
                 { title: 'Dashboard' }
@@ -83,7 +110,7 @@ const routes: Routes = [
        PaginationModule.forRoot(),
        NgbModule,ReactiveFormsModule
     ],
-    declarations: [DashboardComponent, ContentComponent, RegisterComponent, FarshboonBankComponent, ErrorComponent],
-    providers:[BrandsResolver, ProjectsResolver, SlidesResolver]
+    declarations: [DashboardComponent, ContentComponent, RegisterComponent, FarshboonBankComponent, ErrorComponent, FarshCartComponent],
+    providers:[BrandsResolver, ProjectsResolver, SlidesResolver, KeyValuesResolver]
 })
 export class DashboardModule { }

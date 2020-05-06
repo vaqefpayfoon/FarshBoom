@@ -82,12 +82,8 @@ export class FarshboonBankComponent implements OnInit {
   this.loadGoods();
 }
 
-sendLike(id: number) {
-  // this.userService.sendLike(this.authService.decodedToken.nameid, id).subscribe(data => {
-  //   this.alertify.success('You have liked: ' + this.user.knownAs);
-  // }, error => {
-  //   this.alertify.error(error);
-  // });
+sendLike(good: Good) {
+  this.router.navigate([this.good.id], { relativeTo: this.route });
 }
 
 }

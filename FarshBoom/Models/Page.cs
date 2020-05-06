@@ -9,7 +9,6 @@ namespace FarshBoom.Models
         public int PageId { get; set; }
         public Page Page { get; set; }
         public string Passage { get; set; }
-        public byte[] Image { get; set; }
         public string ImageUrl { get; set; }
     }
 }

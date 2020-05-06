@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://172.18.100.16:200/api/',
+  //apiUrl: 'http://newsite.farshboom.com/api/',
+  apiUrl: 'http://localhost:5000/api/',
 };

@@ -53,8 +53,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         JwtModule.forRoot({
          config: {
            tokenGetter: tokenGetter,
-           whitelistedDomains: ['localhost:5000'],
-           blacklistedRoutes: ['localhost:5000/api/auth']
+           whitelistedDomains: ['http://newsite.farshboom.com', 'http://localhost:5000'],
+           blacklistedRoutes: ['http://newsite.farshboom.com/api/auth', 'http://localhost:5000/api/auth']
          }
        })
     ],

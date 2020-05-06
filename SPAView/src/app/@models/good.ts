@@ -28,8 +28,7 @@ export interface Good {
   lenght: number;
   width: number;
   slider: boolean;
-  imageUrl: string;
   title: string;
-  image: any;
+  imageUrl: string;
   AddedDate: Date;
 }
