@@ -1,1 +1,124 @@
-<p>farsh-cart works!</p>
+<div class="animated fadeIn">
+    <div class="row">
+      <div *ngIf="saveState != '0'">
+          <div class="card">
+              <div class="card-header">
+                <ng-container *ngIf="saveState == '1'; else elseTemplate">
+                    <ngb-alert type="info" [dismissible]="true">
+                      {{ successMessage }}
+                    </ngb-alert>
+                  </ng-container>
+                  <ng-template #elseTemplate>
+                    <ngb-alert type="danger" [dismissible]="true">
+                      {{ errorMessage }}
+                    </ngb-alert>
+                  </ng-template>
+              </div>
+          </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header">
+            <strong>کد فرش بوم {{good.farshboomCode}}</strong>
+          </div>
+          <div class="card-body">
+            <div class="card-img-wrapper">
+              <img class="card-img-top" src="{{good.imageUrl}}">
+            </div>
+          </div>
+          <div class="card-footer">
+            <strong>رنگ فرش : {{good.color}} - {{good.color2}}</strong>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <!-- Nav tabs -->
+        <ngb-tabset>
+          <ngb-tab>
+            <ng-template ngbTabTitle><b>مشخصات اصلی</b></ng-template>
+            <ng-template ngbTabContent>              
+              <div class="cart">
+                  <div class="card-header">
+                    اندازه {{good.size}}
+                  </div>
+              </div>
+              <div class="cart">
+                <div class="card-header">
+                    نوع {{good.type}}
+                </div>
+             </div>
+             <div class="cart">
+                <div class="card-header">
+                    گونه {{good.brand}}
+                </div>
+             </div>
+             <div class="cart">
+                <div class="card-header">
+                    پرز {{good.porz}}
+                </div>
+             </div>
+             <div class="cart">
+                <div class="card-header">
+                    ابعاد {{good.lenght}} * {{good.lenght}}
+                </div>
+             </div>
+              <div class="cart">
+                <div class="card-body">
+                  <form  #loginForm="ngForm" (ngSubmit)="sendLike()">
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="icon-phone"></i></span>
+                      </div>
+                      <input type="number" class="form-control" type="number" name="title" required placeholder="تلفن برای دعوت به نمایشگاه" [(ngModel)]="model.title">
+                    </div>
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="icon-pencil"></i></span>
+                      </div>
+                      <textarea class="form-control" type="text" name="passage" required placeholder="نظرات کاربران" required [(ngModel)]="model.passage" rows="4">
+                      </textarea>
+                    </div>
+                    <button *ngIf="loggedIn()" type="submit" class="btn btn-primary"><i class="icon-like"></i> ارسال نظر شما</button>
+                  </form>
+                </div>
+              </div>
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab title="">
+            <ng-template ngbTabTitle><b>مشخصات تکمیلی</b></ng-template>
+            <ng-template ngbTabContent>
+                  <div class="cart">
+                    <div class="card-header">
+                        چله {{good.chele}}
+                    </div>
+                </div>
+                <div class="cart">
+                  <div class="card-header">
+                    نقشه {{good.plan}}
+                  </div>
+               </div>
+               <div class="cart">
+                  <div class="card-header">
+                    ارزیابی {{good.assessment}}
+                  </div>
+               </div>
+               <div class="cart">
+                  <div class="card-header">
+                    رج {{good.raj}}
+                  </div>
+               </div>
+               <div class="cart">
+                  <div class="card-header">
+                    رنگ حاشیه {{good.color2}}
+                  </div>
+               </div>
+            </ng-template>
+
+          </ngb-tab>
+        </ngb-tabset>
+      </div><!--/.col-->
+    </div>
+  </div>
+  

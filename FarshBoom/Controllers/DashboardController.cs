@@ -131,8 +131,22 @@ namespace FarshBoom.Controllers
                 where += "And ibt_srl = " + userParams.BrandId;
             if(userParams.ColorId != null)
                 where += "And color_srl = " + userParams.ColorId;
-            if(userParams.PorzId!= null)
+            if(userParams.PorzId != null)
                 where += "And porz_type = " + userParams.PorzId;
+            if(userParams.Length != null)
+                where += "And lenght = " + userParams.Length;
+            if(userParams.Weight != null)
+                where += "And widht = " + userParams.Weight;
+
+            if(userParams.CheleId != null)
+                where += "And chele_type = " + userParams.CheleId;
+            if(userParams.PlanId != null)
+                where += "And city_srl = " + userParams.PlanId;
+            if(userParams.AssessmentId != null)
+                where += "And carpet_type = " + userParams.AssessmentId;
+            if(userParams.FromPrice != null && userParams.ToPrice != null)
+                where += "And sale_price BETWEEN " + userParams.FromPrice + " And " + userParams.ToPrice;
+            
 
             string connectionString = "Data Source=185.88.152.127,1430;Initial Catalog=94_farsheboom ;User Id=94_vaq;Password=V@qef2512740;MultipleActiveResultSets=True;Max Pool Size=9000;persist security info=True;";
             SqlConnection cnn = new SqlConnection(connectionString);
@@ -141,7 +155,7 @@ namespace FarshBoom.Controllers
             SqlCommand command = new SqlCommand();
             command.Connection = cnn;
             // 
-            command.CommandText = @"SELECT Top(300) [srl], [porz_type] ,[chele_type] ,[carpet_type] ,[ibt_srl] ,[size_srl] ,[color_srl] ,[color_srl2], [raj_srl], [title_igd], [lenght] ,[widht] ,[code_igd] ,[provider_code] ,[brand_name], [size_title], [color_name], [porz_title], [carpet_title] FROM [94_farsheboom].[94_vaq].[FarshBoomSite] Where (sold = 0 or sold is null)" + where + " Order By srl Desc";
+            command.CommandText = @"SELECT Top(300) [srl], [porz_type] ,[chele_type] ,[carpet_type] ,[ibt_srl] ,[size_srl] ,[color_srl] ,[color_srl2], [raj_srl], [title_igd], [lenght] ,[widht] ,[code_igd] ,[provider_code] ,[brand_name], [size_title], [color_name], [porz_title], [carpet_title], [city_srl], [sale_price], [raj_title], [plan_title] FROM [94_farsheboom].[94_vaq].[FarshBoomSite] Where (sold = 0 or sold is null)" + where + " Order By srl Desc";
             SqlDataReader reader = command.ExecuteReader();
             List<GoodDto> lstGood = new List<GoodDto>();
             while (reader.Read())
@@ -149,6 +163,82 @@ namespace FarshBoom.Controllers
                 if(reader["title_igd"].ToString().Length < 5)
                     continue;
                 GoodDto good = new GoodDto();
+                good.Id = Convert.ToInt32(reader["srl"]);
+                good.ImageUrl = reader["title_igd"].ToString();
+                good.FarshboomCode = reader["code_igd"].ToString();
+                good.ProviderCode = reader["provider_code"].ToString();
+
+                good.Brand = reader["brand_name"].ToString();
+                good.Size = reader["size_title"].ToString();
+                good.Color = reader["color_name"].ToString();
+                good.Porz = reader["porz_title"].ToString();
+                good.Type = reader["carpet_title"].ToString();
+
+                good.Chele = reader["chele_type"].ToString();
+                good.Plan = reader["plan_title"].ToString();
+                good.Raj = reader["raj_title"].ToString();
+
+                good.ImageUrl = reader["title_igd"].ToString();
+                good.ImageUrl = good.ImageUrl.Replace("../", "http://bank.farshboom.com/");
+                 if(reader["porz_type"] != null && !Convert.IsDBNull(reader["porz_type"]))
+                     good.PorzId = Convert.ToInt32(reader["porz_type"]);
+                 if(reader["chele_type"] != null && !Convert.IsDBNull(reader["chele_type"]))
+                     good.CheleId = Convert.ToInt32(reader["chele_type"]);
+                 if(reader["carpet_type"] != null && !Convert.IsDBNull(reader["carpet_type"]))
+                     good.TypeId = Convert.ToInt32(reader["carpet_type"]);
+                 if(reader["ibt_srl"] != null && !Convert.IsDBNull(reader["ibt_srl"]))
+                     good.BrandId = Convert.ToInt32(reader["ibt_srl"]);
+                 if(reader["size_srl"] != null && !Convert.IsDBNull(reader["size_srl"]))
+                     good.SizeId = Convert.ToInt32(reader["size_srl"]);
+                 if(reader["color_srl"] != null && !Convert.IsDBNull(reader["color_srl"]))
+                     good.ColorId = Convert.ToInt32(reader["color_srl"]);
+                 if(reader["color_srl2"] != null && !Convert.IsDBNull(reader["color_srl2"]))
+                     good.ColorId2 = Convert.ToInt32(reader["color_srl2"]);
+                if(reader["lenght"] != null && !Convert.IsDBNull(reader["lenght"]))
+                    good.Lenght = Convert.ToInt32(reader["lenght"]);
+                if(reader["widht"] != null && !Convert.IsDBNull(reader["widht"]))
+                    good.Width = Convert.ToInt32(reader["widht"]);
+                 if(reader["raj_srl"] != null && !Convert.IsDBNull(reader["raj_srl"]))
+                     good.RajId = Convert.ToInt32(reader["raj_srl"]);
+                 if(reader["city_srl"] != null && !Convert.IsDBNull(reader["city_srl"]))
+                     good.RajId = Convert.ToInt32(reader["city_srl"]);
+                 if(reader["sale_price"] != null && !Convert.IsDBNull(reader["sale_price"]))
+                     good.SalePrice = Convert.ToInt32(reader["sale_price"]);
+
+                lstGood.Add(good);
+            }
+            cnn.Close();
+
+            var pagedList = lstGood.AsQueryable();
+            var goods = Paginiation<GoodDto>.CreateAsync(pagedList, userParams.PageNumber, userParams.PageSize);
+
+            IEnumerable<GoodDto> goodDto;
+            goodDto = _mapper.Map<IEnumerable<GoodDto>>(goods);   
+
+
+            Response.AddPagination(goods.CurrentPage, goods.PageSize,
+                goods.TotalCount, goods.TotalPages);
+            return Ok(goodDto);
+        }
+    [HttpGet("getGood")]
+        public IActionResult GetGood(string key, string field) 
+        {      
+            string connectionString = "Data Source=185.88.152.127,1430;Initial Catalog=94_farsheboom ;User Id=94_vaq;Password=V@qef2512740;MultipleActiveResultSets=True;Max Pool Size=9000;persist security info=True;";
+            SqlConnection cnn = new SqlConnection(connectionString);
+            if(cnn.State == ConnectionState.Closed)
+                cnn.Open();
+            SqlCommand command = new SqlCommand();
+            command.Connection = cnn;
+            // 
+            command.CommandText = @"SELECT [srl], [porz_type] ,[chele_type] ,[carpet_type] ,[ibt_srl] ,[size_srl] ,[color_srl] ,[color_srl2], [raj_srl], [title_igd], [lenght] ,[widht] ,[code_igd] ,[provider_code] ,[brand_name], [size_title], [color_name], [porz_title], [carpet_title] FROM [94_farsheboom].[94_vaq].[FarshBoomSite] Where (sold = 0 or sold is null) And srl=" + key ;
+            SqlDataReader reader = command.ExecuteReader();
+            
+            GoodDto good = new GoodDto();
+            while (reader.Read())
+            {
+                if(reader["title_igd"].ToString().Length < 5)
+                    continue;
+                
                 good.Id = Convert.ToInt32(reader["srl"]);
                 good.ImageUrl = reader["title_igd"].ToString();
                 good.FarshboomCode = reader["code_igd"].ToString();
@@ -183,20 +273,9 @@ namespace FarshBoom.Controllers
                  if(reader["raj_srl"] != null && !Convert.IsDBNull(reader["raj_srl"]))
                      good.RajId = Convert.ToInt32(reader["raj_srl"]);
 
-                lstGood.Add(good);
             }
             cnn.Close();
-
-            var pagedList = lstGood.AsQueryable();
-            var goods = Paginiation<GoodDto>.CreateAsync(pagedList, userParams.PageNumber, userParams.PageSize);
-
-            IEnumerable<GoodDto> goodDto;
-            goodDto = _mapper.Map<IEnumerable<GoodDto>>(goods);   
-
-
-            Response.AddPagination(goods.CurrentPage, goods.PageSize,
-                goods.TotalCount, goods.TotalPages);
-            return Ok(goodDto);
+            return Ok(new {goodDto = good});
         }
     }
 }

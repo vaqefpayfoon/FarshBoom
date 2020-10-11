@@ -15,6 +15,8 @@ import { FarshboonBankComponent } from './farshboon-bank/farshboon-bank.componen
 import { ErrorComponent } from './error/error.component';
 import { KeyValuesResolver } from '../@resolvers/keyvalues.resolver';
 import { FarshCartComponent } from './farsh-cart/farsh-cart.component';
+import { Good2Resolver } from '../@resolvers/good2.resolver';
+import { LikeResolver } from '../@resolvers/like.resolver';
 
 
 const routes: Routes = [
@@ -42,6 +44,19 @@ const routes: Routes = [
         ]
       }
     },
+    {
+      path: 'farshboombank/:id',
+      component: FarshCartComponent,
+      resolve: {good: Good2Resolver, like: LikeResolver},
+      data: {
+        title: '',
+        urls: [
+          { title: 'Dashboard', url: '/register' },
+          { title: 'ngComponent' },
+          { title: 'Button' }
+        ]
+      }
+    },    
     {
 		  path: 'content/:id',
         component: ContentComponent,
@@ -111,6 +126,6 @@ const routes: Routes = [
        NgbModule,ReactiveFormsModule
     ],
     declarations: [DashboardComponent, ContentComponent, RegisterComponent, FarshboonBankComponent, ErrorComponent, FarshCartComponent],
-    providers:[BrandsResolver, ProjectsResolver, SlidesResolver, KeyValuesResolver]
+    providers:[BrandsResolver, ProjectsResolver, SlidesResolver, KeyValuesResolver, Good2Resolver, LikeResolver]
 })
 export class DashboardModule { }

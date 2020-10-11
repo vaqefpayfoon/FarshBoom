@@ -69,4 +69,16 @@ export class DashboardService {
       })
     );
   }
+  
+  good: Good;
+  getGood(key, field) {
+    let params = new HttpParams();
+    params = params.append('key', key);
+    params = params.append('field', field);
+    return this.http.get<Good>(this.baseUrl + "/getGood", { observe: 'response', params }).pipe(map((response: any) => {
+      const createdGood = response.body;
+      this.good = createdGood.goodDto;
+      return this.good;
+    }));
+  }
 }
